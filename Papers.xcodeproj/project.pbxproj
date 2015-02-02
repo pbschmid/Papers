@@ -7,13 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2165576033F6820827EDA186 /* libPods-Papers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4DEAF5E3A5D0C45904BA43 /* libPods-Papers.a */; };
+		3723BD7C1A80009500AB36F2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3723BD7B1A80009500AB36F2 /* Foundation.framework */; };
+		3723BD7E1A8000A100AB36F2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3723BD7D1A8000A100AB36F2 /* UIKit.framework */; };
+		3723BD801A8000AF00AB36F2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3723BD7F1A8000AF00AB36F2 /* CoreGraphics.framework */; };
+		3723BD821A8000B700AB36F2 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3723BD811A8000B700AB36F2 /* AssetsLibrary.framework */; };
+		3723BD851A80050E00AB36F2 /* ImageModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3723BD831A80050E00AB36F2 /* ImageModel.xcdatamodeld */; };
+		3723BD881A8005BF00AB36F2 /* ImageDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 3723BD871A8005BF00AB36F2 /* ImageDetails.m */; };
+		3723BD8B1A8005C000AB36F2 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 3723BD8A1A8005C000AB36F2 /* Image.m */; };
 		377AE2401A7FFC1200F4C126 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AE23F1A7FFC1200F4C126 /* main.m */; };
 		377AE2431A7FFC1200F4C126 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AE2421A7FFC1200F4C126 /* AppDelegate.m */; };
-		377AE2461A7FFC1200F4C126 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AE2451A7FFC1200F4C126 /* ViewController.m */; };
-		377AE2491A7FFC1200F4C126 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 377AE2471A7FFC1200F4C126 /* Main.storyboard */; };
 		377AE24B1A7FFC1200F4C126 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 377AE24A1A7FFC1200F4C126 /* Images.xcassets */; };
-		377AE24E1A7FFC1200F4C126 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 377AE24C1A7FFC1200F4C126 /* LaunchScreen.xib */; };
 		377AE25A1A7FFC1300F4C126 /* PapersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AE2591A7FFC1300F4C126 /* PapersTests.m */; };
+		377AE2661A7FFD7400F4C126 /* PapersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AE2651A7FFD7400F4C126 /* PapersViewController.m */; };
+		377AE26B1A7FFDB500F4C126 /* TesseractClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AE26A1A7FFDB500F4C126 /* TesseractClient.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,19 +34,32 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C9524EDD8ED070AE12F7382 /* Pods-Papers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Papers.release.xcconfig"; path = "Pods/Target Support Files/Pods-Papers/Pods-Papers.release.xcconfig"; sourceTree = "<group>"; };
+		3723BD7B1A80009500AB36F2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3723BD7D1A8000A100AB36F2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		3723BD7F1A8000AF00AB36F2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		3723BD811A8000B700AB36F2 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		3723BD841A80050E00AB36F2 /* ImageModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ImageModel.xcdatamodel; sourceTree = "<group>"; };
+		3723BD861A8005BF00AB36F2 /* ImageDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDetails.h; sourceTree = "<group>"; };
+		3723BD871A8005BF00AB36F2 /* ImageDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDetails.m; sourceTree = "<group>"; };
+		3723BD891A8005C000AB36F2 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
+		3723BD8A1A8005C000AB36F2 /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 		377AE23A1A7FFC1200F4C126 /* Papers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Papers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		377AE23E1A7FFC1200F4C126 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		377AE23F1A7FFC1200F4C126 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		377AE2411A7FFC1200F4C126 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		377AE2421A7FFC1200F4C126 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		377AE2441A7FFC1200F4C126 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		377AE2451A7FFC1200F4C126 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		377AE2481A7FFC1200F4C126 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		377AE24A1A7FFC1200F4C126 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		377AE24D1A7FFC1200F4C126 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		377AE2531A7FFC1300F4C126 /* PapersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PapersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		377AE2581A7FFC1300F4C126 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		377AE2591A7FFC1300F4C126 /* PapersTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PapersTests.m; sourceTree = "<group>"; };
+		377AE2631A7FFCDA00F4C126 /* Papers-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Papers-Prefix.pch"; sourceTree = "<group>"; };
+		377AE2641A7FFD7400F4C126 /* PapersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PapersViewController.h; sourceTree = "<group>"; };
+		377AE2651A7FFD7400F4C126 /* PapersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PapersViewController.m; sourceTree = "<group>"; };
+		377AE2691A7FFDB500F4C126 /* TesseractClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TesseractClient.h; sourceTree = "<group>"; };
+		377AE26A1A7FFDB500F4C126 /* TesseractClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TesseractClient.m; sourceTree = "<group>"; };
+		DA4DEAF5E3A5D0C45904BA43 /* libPods-Papers.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Papers.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2D6C0852AEC27A73EFD1C78 /* Pods-Papers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Papers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Papers/Pods-Papers.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +67,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3723BD821A8000B700AB36F2 /* AssetsLibrary.framework in Frameworks */,
+				3723BD801A8000AF00AB36F2 /* CoreGraphics.framework in Frameworks */,
+				3723BD7E1A8000A100AB36F2 /* UIKit.framework in Frameworks */,
+				3723BD7C1A80009500AB36F2 /* Foundation.framework in Frameworks */,
+				2165576033F6820827EDA186 /* libPods-Papers.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,12 +85,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		143E022F45702C5579A13C94 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F2D6C0852AEC27A73EFD1C78 /* Pods-Papers.debug.xcconfig */,
+				0C9524EDD8ED070AE12F7382 /* Pods-Papers.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		377AE2311A7FFC1200F4C126 = {
 			isa = PBXGroup;
 			children = (
 				377AE23C1A7FFC1200F4C126 /* Papers */,
 				377AE2561A7FFC1300F4C126 /* PapersTests */,
 				377AE23B1A7FFC1200F4C126 /* Products */,
+				143E022F45702C5579A13C94 /* Pods */,
+				F07DB36A0151E7C5AA621C20 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,13 +117,10 @@
 		377AE23C1A7FFC1200F4C126 /* Papers */ = {
 			isa = PBXGroup;
 			children = (
-				377AE2411A7FFC1200F4C126 /* AppDelegate.h */,
-				377AE2421A7FFC1200F4C126 /* AppDelegate.m */,
-				377AE2441A7FFC1200F4C126 /* ViewController.h */,
-				377AE2451A7FFC1200F4C126 /* ViewController.m */,
-				377AE2471A7FFC1200F4C126 /* Main.storyboard */,
+				377AE2681A7FFD8100F4C126 /* Delegate */,
+				377AE26C1A7FFDBA00F4C126 /* Model */,
+				377AE2671A7FFD7900F4C126 /* Controller */,
 				377AE24A1A7FFC1200F4C126 /* Images.xcassets */,
-				377AE24C1A7FFC1200F4C126 /* LaunchScreen.xib */,
 				377AE23D1A7FFC1200F4C126 /* Supporting Files */,
 			);
 			path = Papers;
@@ -98,6 +131,7 @@
 			children = (
 				377AE23E1A7FFC1200F4C126 /* Info.plist */,
 				377AE23F1A7FFC1200F4C126 /* main.m */,
+				377AE2631A7FFCDA00F4C126 /* Papers-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -119,6 +153,50 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		377AE2671A7FFD7900F4C126 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				377AE2641A7FFD7400F4C126 /* PapersViewController.h */,
+				377AE2651A7FFD7400F4C126 /* PapersViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		377AE2681A7FFD8100F4C126 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				377AE2411A7FFC1200F4C126 /* AppDelegate.h */,
+				377AE2421A7FFC1200F4C126 /* AppDelegate.m */,
+			);
+			name = Delegate;
+			sourceTree = "<group>";
+		};
+		377AE26C1A7FFDBA00F4C126 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3723BD831A80050E00AB36F2 /* ImageModel.xcdatamodeld */,
+				3723BD891A8005C000AB36F2 /* Image.h */,
+				3723BD8A1A8005C000AB36F2 /* Image.m */,
+				3723BD861A8005BF00AB36F2 /* ImageDetails.h */,
+				3723BD871A8005BF00AB36F2 /* ImageDetails.m */,
+				377AE2691A7FFDB500F4C126 /* TesseractClient.h */,
+				377AE26A1A7FFDB500F4C126 /* TesseractClient.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		F07DB36A0151E7C5AA621C20 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3723BD811A8000B700AB36F2 /* AssetsLibrary.framework */,
+				3723BD7F1A8000AF00AB36F2 /* CoreGraphics.framework */,
+				3723BD7D1A8000A100AB36F2 /* UIKit.framework */,
+				3723BD7B1A80009500AB36F2 /* Foundation.framework */,
+				DA4DEAF5E3A5D0C45904BA43 /* libPods-Papers.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -126,9 +204,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 377AE25D1A7FFC1300F4C126 /* Build configuration list for PBXNativeTarget "Papers" */;
 			buildPhases = (
+				8EDB98C1D7B05E1FD0A30762 /* Check Pods Manifest.lock */,
 				377AE2361A7FFC1200F4C126 /* Sources */,
 				377AE2371A7FFC1200F4C126 /* Frameworks */,
 				377AE2381A7FFC1200F4C126 /* Resources */,
+				6320F6864F67EA53DBA1B24A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -199,8 +279,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				377AE2491A7FFC1200F4C126 /* Main.storyboard in Resources */,
-				377AE24E1A7FFC1200F4C126 /* LaunchScreen.xib in Resources */,
 				377AE24B1A7FFC1200F4C126 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -214,14 +292,51 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6320F6864F67EA53DBA1B24A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Papers/Pods-Papers-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8EDB98C1D7B05E1FD0A30762 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		377AE2361A7FFC1200F4C126 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				377AE2461A7FFC1200F4C126 /* ViewController.m in Sources */,
+				3723BD851A80050E00AB36F2 /* ImageModel.xcdatamodeld in Sources */,
 				377AE2431A7FFC1200F4C126 /* AppDelegate.m in Sources */,
+				3723BD881A8005BF00AB36F2 /* ImageDetails.m in Sources */,
+				377AE26B1A7FFDB500F4C126 /* TesseractClient.m in Sources */,
+				377AE2661A7FFD7400F4C126 /* PapersViewController.m in Sources */,
 				377AE2401A7FFC1200F4C126 /* main.m in Sources */,
+				3723BD8B1A8005C000AB36F2 /* Image.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,25 +357,6 @@
 			targetProxy = 377AE2541A7FFC1300F4C126 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		377AE2471A7FFC1200F4C126 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				377AE2481A7FFC1200F4C126 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		377AE24C1A7FFC1200F4C126 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				377AE24D1A7FFC1200F4C126 /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		377AE25B1A7FFC1300F4C126 /* Debug */ = {
@@ -341,8 +437,11 @@
 		};
 		377AE25E1A7FFC1300F4C126 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F2D6C0852AEC27A73EFD1C78 /* Pods-Papers.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Papers/Papers-Prefix.pch";
 				INFOPLIST_FILE = Papers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -351,8 +450,11 @@
 		};
 		377AE25F1A7FFC1300F4C126 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C9524EDD8ED070AE12F7382 /* Pods-Papers.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Papers/Papers-Prefix.pch";
 				INFOPLIST_FILE = Papers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -412,6 +514,7 @@
 				377AE25F1A7FFC1300F4C126 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		377AE2601A7FFC1300F4C126 /* Build configuration list for PBXNativeTarget "PapersTests" */ = {
 			isa = XCConfigurationList;
@@ -420,8 +523,22 @@
 				377AE2621A7FFC1300F4C126 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3723BD831A80050E00AB36F2 /* ImageModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3723BD841A80050E00AB36F2 /* ImageModel.xcdatamodel */,
+			);
+			currentVersion = 3723BD841A80050E00AB36F2 /* ImageModel.xcdatamodel */;
+			path = ImageModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 377AE2321A7FFC1200F4C126 /* Project object */;
 }

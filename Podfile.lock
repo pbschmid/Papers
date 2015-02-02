@@ -1,0 +1,25 @@
+PODS:
+  - GPUImage (0.1.6)
+  - MagicalRecord (2.2):
+    - MagicalRecord/Core
+  - MagicalRecord/Core (2.2)
+  - MBProgressHUD (0.9)
+  - TesseractOCRiOS (3.4.0)
+
+DEPENDENCIES:
+  - GPUImage (~> 0.1)
+  - MagicalRecord
+  - MBProgressHUD (~> 0.8)
+  - TesseractOCRiOS (from `https://github.com/gali8/Tesseract-OCR-iOS.git`)
+
+EXTERNAL SOURCES:
+  TesseractOCRiOS:
+    :git: https://github.com/gali8/Tesseract-OCR-iOS.git
+
+SPEC CHECKSUMS:
+  GPUImage: cecb0830bb9428f50192042e3c7b53810f51388e
+  MagicalRecord: 2b471584fc9e3137f3d0a56967917baa4979e224
+  MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
+  TesseractOCRiOS: 9b27e85e8eb7e25c63e4ac66db87f6df8eae31e2
+
+COCOAPODS: 0.34.4

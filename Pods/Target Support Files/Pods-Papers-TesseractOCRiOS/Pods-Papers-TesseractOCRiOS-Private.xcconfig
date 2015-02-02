@@ -1,0 +1,7 @@
+#include "Pods-Papers-TesseractOCRiOS.xcconfig"
+CLANG_CXX_LIBRARY = ${PODS_PAPERS_TESSERACTOCRIOS_CLANG_CXX_LIBRARY}
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Build" "${PODS_ROOT}/Headers/Build/TesseractOCRiOS" "${PODS_ROOT}/Headers/Build/TesseractOCRiOS/TesseractOCR" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/GPUImage" "${PODS_ROOT}/Headers/Public/MBProgressHUD" "${PODS_ROOT}/Headers/Public/MagicalRecord" "${PODS_ROOT}/Headers/Public/TesseractOCRiOS" "${PODS_ROOT}/Headers/Public/TesseractOCRiOS/TesseractOCR"
+LIBRARY_SEARCH_PATHS = ${PODS_PAPERS_TESSERACTOCRIOS_LIBRARY_SEARCH_PATHS}
+OTHER_LDFLAGS = ${PODS_PAPERS_TESSERACTOCRIOS_OTHER_LDFLAGS} -ObjC
+PODS_ROOT = ${SRCROOT}
