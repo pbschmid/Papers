@@ -15,6 +15,8 @@
 		3723BD851A80050E00AB36F2 /* ImageModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3723BD831A80050E00AB36F2 /* ImageModel.xcdatamodeld */; };
 		3723BD881A8005BF00AB36F2 /* ImageDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 3723BD871A8005BF00AB36F2 /* ImageDetails.m */; };
 		3723BD8B1A8005C000AB36F2 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 3723BD8A1A8005C000AB36F2 /* Image.m */; };
+		3723BD8F1A8015F800AB36F2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3723BD8E1A8015F800AB36F2 /* LaunchScreen.xib */; };
+		3723BD921A8018D000AB36F2 /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 3723BD911A8018CF00AB36F2 /* tessdata */; };
 		377AE2401A7FFC1200F4C126 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AE23F1A7FFC1200F4C126 /* main.m */; };
 		377AE2431A7FFC1200F4C126 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AE2421A7FFC1200F4C126 /* AppDelegate.m */; };
 		377AE24B1A7FFC1200F4C126 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 377AE24A1A7FFC1200F4C126 /* Images.xcassets */; };
@@ -44,6 +46,8 @@
 		3723BD871A8005BF00AB36F2 /* ImageDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDetails.m; sourceTree = "<group>"; };
 		3723BD891A8005C000AB36F2 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
 		3723BD8A1A8005C000AB36F2 /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
+		3723BD8E1A8015F800AB36F2 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		3723BD911A8018CF00AB36F2 /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
 		377AE23A1A7FFC1200F4C126 /* Papers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Papers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		377AE23E1A7FFC1200F4C126 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		377AE23F1A7FFC1200F4C126 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -94,6 +98,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		3723BD901A80161C00AB36F2 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				3723BD8E1A8015F800AB36F2 /* LaunchScreen.xib */,
+			);
+			name = Launch;
+			sourceTree = "<group>";
+		};
 		377AE2311A7FFC1200F4C126 = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +129,8 @@
 		377AE23C1A7FFC1200F4C126 /* Papers */ = {
 			isa = PBXGroup;
 			children = (
+				3723BD911A8018CF00AB36F2 /* tessdata */,
+				3723BD901A80161C00AB36F2 /* Launch */,
 				377AE2681A7FFD8100F4C126 /* Delegate */,
 				377AE26C1A7FFDBA00F4C126 /* Model */,
 				377AE2671A7FFD7900F4C126 /* Controller */,
@@ -279,7 +293,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3723BD8F1A8015F800AB36F2 /* LaunchScreen.xib in Resources */,
 				377AE24B1A7FFC1200F4C126 /* Images.xcassets in Resources */,
+				3723BD921A8018D000AB36F2 /* tessdata in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +461,7 @@
 				INFOPLIST_FILE = Papers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -458,6 +475,7 @@
 				INFOPLIST_FILE = Papers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
