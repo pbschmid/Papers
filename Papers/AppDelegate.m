@@ -22,7 +22,7 @@
     PapersViewController *pvc = [[PapersViewController alloc] init];
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:pvc];
     self.window.rootViewController = nvc;
-    [MagicalRecord setupCoreDataStackWithStoreNamed:@"TextModel"];
+    [MagicalRecord setupCoreDataStackWithStoreNamed:@"ImageModel"];
     [self.window makeKeyAndVisible];
     return YES;
 }
