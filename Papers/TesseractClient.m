@@ -71,10 +71,8 @@
     NSData *inputData = UIImagePNGRepresentation(inputImage);
     NSData *filteredData = UIImagePNGRepresentation(filteredImage);
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsPath = [paths objectAtIndex:0];
-    NSString *inputPath = [documentsPath stringByAppendingPathComponent:@"input.png"];
-    NSString *filteredPath = [documentsPath stringByAppendingPathComponent:@"filtered.png"];
+    NSString *inputPath = [self documentsPathForFileName:@"input.png"];
+    NSString *filteredPath = [self documentsPathForFileName:@"filtered.png"];
     
     [inputData writeToFile:inputPath atomically:YES];
     [filteredData writeToFile:filteredPath atomically:YES];
@@ -92,6 +90,15 @@
 - (BOOL)shouldCancelImageRecognitionForTesseract:(G8Tesseract *)tesseract
 {
     return NO;
+}
+
+#pragma mark - Helpers
+
+- (NSString *)documentsPathForFileName:(NSString *)name
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0];
+    return [documentsPath stringByAppendingPathComponent:name];
 }
 
 @end
