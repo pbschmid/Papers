@@ -339,6 +339,9 @@
                     self.recognizedImage.imageDetails.scanned = [NSNumber numberWithBool:YES];
                     [self saveContext];
                     [self.tableView reloadData];
+                    
+                    // write to file
+                    [self writeToTextFile];
                     [self cleanUp]; // free memory
                     
                     // show success
@@ -357,9 +360,11 @@
 
 #pragma mark - Quartz 2D
 
-- (void)createPDFFile
+- (void)writeToTextFile
 {
-    
+    NSError *error;
+    NSString *textPath = [self.client documentsPathForFileName:@"scanned.txt"];
+    [self.recognizedImage.text writeToFile:textPath atomically:YES encoding:NSUTF8StringEncoding error:&error];
 }
 
 #pragma mark - Source
