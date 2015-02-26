@@ -67,6 +67,18 @@
     // retrieve filtered image
     UIImage *filteredImage = [stillImageFilter imageByFilteringImage:inputImage];
     
+    // save images to documents
+    NSData *inputData = UIImagePNGRepresentation(inputImage);
+    NSData *filteredData = UIImagePNGRepresentation(filteredImage);
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0];
+    NSString *inputPath = [documentsPath stringByAppendingPathComponent:@"input.png"];
+    NSString *filteredPath = [documentsPath stringByAppendingPathComponent:@"filtered.png"];
+    
+    [inputData writeToFile:inputPath atomically:YES];
+    [filteredData writeToFile:filteredPath atomically:YES];
+
     // bypass tesseract tresholding
     // by returning filtered image
     return filteredImage;
