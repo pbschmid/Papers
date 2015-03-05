@@ -14,6 +14,5 @@ typedef void (^CompletionBlock)(BOOL success, NSString *response, NSError *error
 
 + (TesseractClient *)sharedTesseractClient;
 - (void)startScanningImage:(UIImage *)image withCallback:(CompletionBlock)block;
-- (NSString *)documentsPathForFileName:(NSString *)name;
 
 @end

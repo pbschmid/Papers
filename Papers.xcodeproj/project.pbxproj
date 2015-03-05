@@ -17,6 +17,8 @@
 		3723BD8B1A8005C000AB36F2 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 3723BD8A1A8005C000AB36F2 /* Image.m */; };
 		3723BD8F1A8015F800AB36F2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3723BD8E1A8015F800AB36F2 /* LaunchScreen.xib */; };
 		3723BD921A8018D000AB36F2 /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 3723BD911A8018CF00AB36F2 /* tessdata */; };
+		372B4A3A1AA8C6E400B38632 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 372B4A391AA8C6E400B38632 /* CoreText.framework */; };
+		372B4A3D1AA8C75A00B38632 /* PDFClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 372B4A3C1AA8C75A00B38632 /* PDFClient.m */; };
 		377AE2401A7FFC1200F4C126 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AE23F1A7FFC1200F4C126 /* main.m */; };
 		377AE2431A7FFC1200F4C126 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AE2421A7FFC1200F4C126 /* AppDelegate.m */; };
 		377AE24B1A7FFC1200F4C126 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 377AE24A1A7FFC1200F4C126 /* Images.xcassets */; };
@@ -48,6 +50,9 @@
 		3723BD8A1A8005C000AB36F2 /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 		3723BD8E1A8015F800AB36F2 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		3723BD911A8018CF00AB36F2 /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
+		372B4A391AA8C6E400B38632 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		372B4A3B1AA8C75A00B38632 /* PDFClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFClient.h; sourceTree = "<group>"; };
+		372B4A3C1AA8C75A00B38632 /* PDFClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFClient.m; sourceTree = "<group>"; };
 		377AE23A1A7FFC1200F4C126 /* Papers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Papers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		377AE23E1A7FFC1200F4C126 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		377AE23F1A7FFC1200F4C126 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -71,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				372B4A3A1AA8C6E400B38632 /* CoreText.framework in Frameworks */,
 				3723BD821A8000B700AB36F2 /* AssetsLibrary.framework in Frameworks */,
 				3723BD801A8000AF00AB36F2 /* CoreGraphics.framework in Frameworks */,
 				3723BD7E1A8000A100AB36F2 /* UIKit.framework in Frameworks */,
@@ -195,6 +201,8 @@
 				3723BD871A8005BF00AB36F2 /* ImageDetails.m */,
 				377AE2691A7FFDB500F4C126 /* TesseractClient.h */,
 				377AE26A1A7FFDB500F4C126 /* TesseractClient.m */,
+				372B4A3B1AA8C75A00B38632 /* PDFClient.h */,
+				372B4A3C1AA8C75A00B38632 /* PDFClient.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -202,6 +210,7 @@
 		F07DB36A0151E7C5AA621C20 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				372B4A391AA8C6E400B38632 /* CoreText.framework */,
 				3723BD811A8000B700AB36F2 /* AssetsLibrary.framework */,
 				3723BD7F1A8000AF00AB36F2 /* CoreGraphics.framework */,
 				3723BD7D1A8000A100AB36F2 /* UIKit.framework */,
@@ -353,6 +362,7 @@
 				377AE2661A7FFD7400F4C126 /* PapersViewController.m in Sources */,
 				377AE2401A7FFC1200F4C126 /* main.m in Sources */,
 				3723BD8B1A8005C000AB36F2 /* Image.m in Sources */,
+				372B4A3D1AA8C75A00B38632 /* PDFClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,9 +466,11 @@
 			baseConfigurationReference = F2D6C0852AEC27A73EFD1C78 /* Pods-Papers.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Papers/Papers-Prefix.pch";
 				INFOPLIST_FILE = Papers/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -470,9 +482,11 @@
 			baseConfigurationReference = 0C9524EDD8ED070AE12F7382 /* Pods-Papers.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Papers/Papers-Prefix.pch";
 				INFOPLIST_FILE = Papers/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;

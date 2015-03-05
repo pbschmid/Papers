@@ -12,19 +12,22 @@
 #import "MBProgressHUD.h"
 #import "ImageDetails.h"
 #import "Image.h"
+#import "PDFClient.h"
 
 @interface PapersViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
 @property (nonatomic, strong) UIImage *imageToRecognize;
 @property (nonatomic, strong) NSMutableArray *images;
-@property (nonatomic, strong) TesseractClient *client;
 @property (nonatomic, strong) Image *recognizedImage;
 @property (nonatomic, strong) Image *image;
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIColor *backgroundColor;
 @property (nonatomic, strong) UIColor *textColor;
+
+@property (nonatomic, strong) TesseractClient *client;
+@property (nonatomic, strong) PDFClient *pdfClient;
 
 @end
 
@@ -215,6 +218,24 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    // TODO: Saving image doesn't work.
+    // check source type of image picker
+    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+        
+        // save image to photos if camera was used
+        UIImage *image = info[UIImagePickerControllerOriginalImage];
+        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+        [library writeImageToSavedPhotosAlbum:[image CGImage]
+                                  orientation:(ALAssetOrientation)[image imageOrientation]
+                              completionBlock:^(NSURL *assetURL, NSError *error) {
+                                  if (error) {
+                                      NSLog(@"Error saving image: %@", [error userInfo]);
+                                  } else {
+                                      NSLog(@"Successfully saved image.");
+                                  }
+                              }];
+    }
+    
     // get asset URL from image picker
     NSDate *currentDate = [NSDate date];
     NSURL *imageURL = info[UIImagePickerControllerReferenceURL];
@@ -362,8 +383,12 @@
 
 - (void)writeToTextFile
 {
+    // initialize pdf client
+    self.pdfClient = [PDFClient sharedPDFClient];
+    
+    // write to text file
     NSError *error;
-    NSString *textPath = [self.client documentsPathForFileName:@"scanned.txt"];
+    NSString *textPath = [self.pdfClient documentsPathForFileName:@"scanned.txt"];
     [self.recognizedImage.text writeToFile:textPath atomically:YES encoding:NSUTF8StringEncoding error:&error];
 }
 
