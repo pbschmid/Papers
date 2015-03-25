@@ -19,6 +19,7 @@
 		3723BD921A8018D000AB36F2 /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 3723BD911A8018CF00AB36F2 /* tessdata */; };
 		372B4A3A1AA8C6E400B38632 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 372B4A391AA8C6E400B38632 /* CoreText.framework */; };
 		372B4A3D1AA8C75A00B38632 /* PDFClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 372B4A3C1AA8C75A00B38632 /* PDFClient.m */; };
+		376919C31AC34C9A00230E68 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 376919C21AC34C9A00230E68 /* DetailViewController.m */; };
 		377AE2401A7FFC1200F4C126 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AE23F1A7FFC1200F4C126 /* main.m */; };
 		377AE2431A7FFC1200F4C126 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AE2421A7FFC1200F4C126 /* AppDelegate.m */; };
 		377AE24B1A7FFC1200F4C126 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 377AE24A1A7FFC1200F4C126 /* Images.xcassets */; };
@@ -53,6 +54,8 @@
 		372B4A391AA8C6E400B38632 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		372B4A3B1AA8C75A00B38632 /* PDFClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFClient.h; sourceTree = "<group>"; };
 		372B4A3C1AA8C75A00B38632 /* PDFClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFClient.m; sourceTree = "<group>"; };
+		376919C11AC34C9A00230E68 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		376919C21AC34C9A00230E68 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		377AE23A1A7FFC1200F4C126 /* Papers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Papers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		377AE23E1A7FFC1200F4C126 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		377AE23F1A7FFC1200F4C126 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -178,6 +181,8 @@
 			children = (
 				377AE2641A7FFD7400F4C126 /* PapersViewController.h */,
 				377AE2651A7FFD7400F4C126 /* PapersViewController.m */,
+				376919C11AC34C9A00230E68 /* DetailViewController.h */,
+				376919C21AC34C9A00230E68 /* DetailViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -357,6 +362,7 @@
 			files = (
 				3723BD851A80050E00AB36F2 /* ImageModel.xcdatamodeld in Sources */,
 				377AE2431A7FFC1200F4C126 /* AppDelegate.m in Sources */,
+				376919C31AC34C9A00230E68 /* DetailViewController.m in Sources */,
 				3723BD881A8005BF00AB36F2 /* ImageDetails.m in Sources */,
 				377AE26B1A7FFDB500F4C126 /* TesseractClient.m in Sources */,
 				377AE2661A7FFD7400F4C126 /* PapersViewController.m in Sources */,
