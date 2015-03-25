@@ -22,6 +22,7 @@
 		376919C31AC34C9A00230E68 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 376919C21AC34C9A00230E68 /* DetailViewController.m */; };
 		376919C61AC34CE100230E68 /* PDFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 376919C51AC34CE100230E68 /* PDFViewController.m */; };
 		376919C91AC34E1E00230E68 /* DropboxClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 376919C81AC34E1E00230E68 /* DropboxClient.m */; };
+		376919CC1AC34F7B00230E68 /* ImageProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 376919CB1AC34F7B00230E68 /* ImageProcessor.m */; };
 		377AE2401A7FFC1200F4C126 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AE23F1A7FFC1200F4C126 /* main.m */; };
 		377AE2431A7FFC1200F4C126 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AE2421A7FFC1200F4C126 /* AppDelegate.m */; };
 		377AE24B1A7FFC1200F4C126 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 377AE24A1A7FFC1200F4C126 /* Images.xcassets */; };
@@ -62,6 +63,8 @@
 		376919C51AC34CE100230E68 /* PDFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFViewController.m; sourceTree = "<group>"; };
 		376919C71AC34E1E00230E68 /* DropboxClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxClient.h; sourceTree = "<group>"; };
 		376919C81AC34E1E00230E68 /* DropboxClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxClient.m; sourceTree = "<group>"; };
+		376919CA1AC34F7B00230E68 /* ImageProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageProcessor.h; sourceTree = "<group>"; };
+		376919CB1AC34F7B00230E68 /* ImageProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageProcessor.m; sourceTree = "<group>"; };
 		377AE23A1A7FFC1200F4C126 /* Papers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Papers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		377AE23E1A7FFC1200F4C126 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		377AE23F1A7FFC1200F4C126 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -214,6 +217,8 @@
 				3723BD871A8005BF00AB36F2 /* ImageDetails.m */,
 				377AE2691A7FFDB500F4C126 /* TesseractClient.h */,
 				377AE26A1A7FFDB500F4C126 /* TesseractClient.m */,
+				376919CA1AC34F7B00230E68 /* ImageProcessor.h */,
+				376919CB1AC34F7B00230E68 /* ImageProcessor.m */,
 				372B4A3B1AA8C75A00B38632 /* PDFClient.h */,
 				372B4A3C1AA8C75A00B38632 /* PDFClient.m */,
 				376919C71AC34E1E00230E68 /* DropboxClient.h */,
@@ -376,6 +381,7 @@
 				376919C31AC34C9A00230E68 /* DetailViewController.m in Sources */,
 				3723BD881A8005BF00AB36F2 /* ImageDetails.m in Sources */,
 				377AE26B1A7FFDB500F4C126 /* TesseractClient.m in Sources */,
+				376919CC1AC34F7B00230E68 /* ImageProcessor.m in Sources */,
 				377AE2661A7FFD7400F4C126 /* PapersViewController.m in Sources */,
 				377AE2401A7FFC1200F4C126 /* main.m in Sources */,
 				376919C91AC34E1E00230E68 /* DropboxClient.m in Sources */,
