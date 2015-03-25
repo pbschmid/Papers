@@ -102,6 +102,119 @@
  return NO;
  }
  
+ 
+ 
+ 
+ 
+ 
+ 
+ #pragma mark - Scanning
+ 
+ - (void)checkForScanning
+ {
+ if (![Image MR_hasAtLeastOneEntityInContext:[NSManagedObjectContext MR_defaultContext]]) {
+ // check if images are available
+ [self showAlertControllerStyleAlertWithTitle:@"No image" message:@"There is no image to scan."];
+ return;
+ } else if ([self.recognizedImage.imageDetails.scanned boolValue] == YES) {
+ // create controller
+ UIAlertController *ac = [UIAlertController alertControllerWithTitle:
+ NSLocalizedString(@"Already scaned.", @"")
+ message:
+ NSLocalizedString(@"Do you want to scan this image again?", @"")
+ preferredStyle:
+ UIAlertControllerStyleAlert];
+ 
+ // create actions
+ UIAlertAction *action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Yes, scan", @"") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+ // scan image
+ [self scanImage];
+ }];
+ UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {}];
+ 
+ // add actions
+ [ac addAction:action];
+ [ac addAction:cancel];
+ 
+ // show controller
+ [self presentViewController:ac animated:YES completion:nil];
+ } else {
+ // create controller
+ UIAlertController *ac = [UIAlertController alertControllerWithTitle:
+ NSLocalizedString(@"Are you sure?", @"")
+ message:
+ NSLocalizedString(@"Do you want to scan this image?", @"")
+ preferredStyle:
+ UIAlertControllerStyleAlert];
+ 
+ // create actions
+ UIAlertAction *action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Yes, scan", @"") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+ // scan image
+ [self scanImage];
+ }];
+ UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {}];
+ 
+ // add actions
+ [ac addAction:action];
+ [ac addAction:cancel];
+ 
+ // show controller
+ [self presentViewController:ac animated:YES completion:nil];
+ }
+ }
+ 
+ - (void)scanImage
+ {
+ NSLog(@"Scanning image: %@", [self.imageToRecognize description]);
+ 
+ // configure hud
+ MBProgressHUD *hud = [self createProgressHUD];
+ [hud show:YES];
+ 
+ // initialize tesseract
+ self.client = [TesseractClient sharedTesseractClient];
+ 
+ // get background thread
+ dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+ [self.client startScanningImage:self.imageToRecognize withCallback:^(BOOL success, NSString *response, NSError *error) {
+ dispatch_async(dispatch_get_main_queue(), ^{
+ if (success) {
+ // hide hud
+ [hud hide:YES];
+ 
+ // save context
+ self.recognizedImage.text = response;
+ self.recognizedImage.imageDetails.scanned = [NSNumber numberWithBool:YES];
+ [self saveContext];
+ [self.tableView reloadData];
+ 
+ // write to file
+ [self writeToTextFile];
+ [self cleanUp]; // free memory
+ 
+ // show success
+ [self showAlertControllerStyleAlertWithTitle:@"Success" message:@"Your image has been scanned."];
+ } else {
+ // hide hud
+ [hud hide:YES];
+ 
+ // show error
+ [self showAlertControllerStyleAlertWithTitle:@"Error" message:@"There was an error scanning your image."];
+ }
+ });
+ }];
+ });
+ }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  */
 
 @end

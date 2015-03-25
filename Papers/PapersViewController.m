@@ -8,8 +8,6 @@
 
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "PapersViewController.h"
-#import "TesseractClient.h"
-#import "MBProgressHUD.h"
 #import "ImageDetails.h"
 #import "Image.h"
 #import "PDFClient.h"
@@ -26,7 +24,6 @@
 @property (nonatomic, strong) UIColor *backgroundColor;
 @property (nonatomic, strong) UIColor *textColor;
 
-@property (nonatomic, strong) TesseractClient *client;
 @property (nonatomic, strong) PDFClient *pdfClient;
 
 @end
@@ -49,15 +46,15 @@
 {
     [super viewDidLoad];
     
-    // color configuration
+    // Color configuration.
     self.backgroundColor = [UIColor colorWithRed:222/255.0f green:184/255.0f blue:135/255.0f alpha:1.0f];
     self.textColor = [UIColor colorWithWhite:0.1f alpha:0.7f];
     self.view.backgroundColor = self.backgroundColor;
     
-    // navigation bar
+    // Navigation-Bar.
     [self configureNavigationBar];
     
-    // table view
+    // Table-View.
     [self configureTableView];
 }
 
@@ -170,16 +167,13 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    // set image to recognize
+    // Get the image.
     Image *image = self.images[indexPath.row];
     self.recognizedImage = image;
     NSString *imageURL = image.imageDetails.path;
-    // TODO: IMAGE URL!!!
-    NSLog(@"Loading image URL: %@", imageURL);
-    
     [self loadImageForAssetURL:[NSURL URLWithString:imageURL]];
-    // start scanning process
-    [self checkForScanning];
+    
+    // TODO: Show the image in the DetailViewController.
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -221,21 +215,6 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    // check source type of image picker
-    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
-        UIImage *imageToSave = [info valueForKey:UIImagePickerControllerOriginalImage];
-        NSData *imageData = UIImagePNGRepresentation(imageToSave);
-        NSString *imagePath = [self.pdfClient documentsPathForFileName:@"savedImage.png"];
-        NSLog(@"WRITING Image to PATH: %@", imagePath);
-        [imageData writeToFile:imagePath atomically:YES];
-        
-        
-        // save image to photos if camera was used
-        /*UIImage *imageToSave = [info valueForKey:UIImagePickerControllerOriginalImage];
-        UIImageWriteToSavedPhotosAlbum(imageToSave, self,
-                                       @selector(image:didFinishSavingWithError:contextInfo:), nil);*/
-    }
-    
     // get asset URL from image picker
     NSDate *currentDate = [NSDate date];
     NSURL *imageURL = [info valueForKey:UIImagePickerControllerReferenceURL];
@@ -253,28 +232,6 @@
     image.imageDetails.path = [imageURL absoluteString];
     [self saveContext];
     [self.tableView reloadData];
-    
-    
-    
-    /*ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-     [library writeImageToSavedPhotosAlbum:[image CGImage]
-     orientation:(ALAssetOrientation)[image imageOrientation]
-     completionBlock:^(NSURL *assetURL, NSError *error) {
-     if (error) {
-     NSLog(@"Error saving image: %@", [error userInfo]);
-     } else {
-     NSLog(@"Successfully saved image.");
-     }
-     }];*/
-}
-
-- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
-{
-    if (error) {
-        NSLog(@"Error saving image: %@", [error userInfo]);
-    } else {
-        NSLog(@"Image successfully saved.");
-    }
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -287,11 +244,7 @@
 
 - (void)loadImageForAssetURL:(NSURL *)url
 {
-    NSString *imagePath = [self.pdfClient documentsPathForFileName:@"savedImage.png"];
-    self.imageToRecognize = [UIImage imageWithContentsOfFile:imagePath];
-    NSLog(@"Loaded: IMAGE %@", [self.imageToRecognize description]);
-    
-    /*ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
     [library assetForURL:url resultBlock:^(ALAsset *asset) {
         // set image to scan
         self.imageToRecognize = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage];
@@ -299,115 +252,10 @@
         if (error) {
             NSLog(@"Error loading image: %@", [error userInfo]);
         }
-    }];*/
+    }];
 }
 
-#pragma mark - SendingClient
-
-- (void)sendText
-{
-    NSLog(@"Sending text...");
-}
-
-#pragma mark - Scanning
-
-- (void)checkForScanning
-{
-    if (![Image MR_hasAtLeastOneEntityInContext:[NSManagedObjectContext MR_defaultContext]]) {
-        // check if images are available
-        [self showAlertControllerStyleAlertWithTitle:@"No image" message:@"There is no image to scan."];
-        return;
-    } else if ([self.recognizedImage.imageDetails.scanned boolValue] == YES) {
-        // create controller
-        UIAlertController *ac = [UIAlertController alertControllerWithTitle:
-                                 NSLocalizedString(@"Already scaned.", @"")
-                                                                    message:
-                                 NSLocalizedString(@"Do you want to scan this image again?", @"")
-                                                             preferredStyle:
-                                 UIAlertControllerStyleAlert];
-        
-        // create actions
-        UIAlertAction *action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Yes, scan", @"") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            // scan image
-            [self scanImage];
-        }];
-        UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {}];
-        
-        // add actions
-        [ac addAction:action];
-        [ac addAction:cancel];
-        
-        // show controller
-        [self presentViewController:ac animated:YES completion:nil];
-    } else {
-        // create controller
-        UIAlertController *ac = [UIAlertController alertControllerWithTitle:
-                                 NSLocalizedString(@"Are you sure?", @"")
-                                                                    message:
-                                 NSLocalizedString(@"Do you want to scan this image?", @"")
-                                                             preferredStyle:
-                                 UIAlertControllerStyleAlert];
-        
-        // create actions
-        UIAlertAction *action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Yes, scan", @"") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            // scan image
-            [self scanImage];
-        }];
-        UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {}];
-        
-        // add actions
-        [ac addAction:action];
-        [ac addAction:cancel];
-        
-        // show controller
-        [self presentViewController:ac animated:YES completion:nil];
-    }
-}
-
-- (void)scanImage
-{
-    NSLog(@"Scanning image: %@", [self.imageToRecognize description]);
-    
-    // configure hud
-    MBProgressHUD *hud = [self createProgressHUD];
-    [hud show:YES];
-    
-    // initialize tesseract
-    self.client = [TesseractClient sharedTesseractClient];
-    
-    // get background thread
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self.client startScanningImage:self.imageToRecognize withCallback:^(BOOL success, NSString *response, NSError *error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (success) {
-                    // hide hud
-                    [hud hide:YES];
-                    
-                    // save context
-                    self.recognizedImage.text = response;
-                    self.recognizedImage.imageDetails.scanned = [NSNumber numberWithBool:YES];
-                    [self saveContext];
-                    [self.tableView reloadData];
-                    
-                    // write to file
-                    [self writeToTextFile];
-                    [self cleanUp]; // free memory
-                    
-                    // show success
-                    [self showAlertControllerStyleAlertWithTitle:@"Success" message:@"Your image has been scanned."];
-                } else {
-                    // hide hud
-                    [hud hide:YES];
-                    
-                    // show error
-                    [self showAlertControllerStyleAlertWithTitle:@"Error" message:@"There was an error scanning your image."];
-                }
-            });
-        }];
-    });
-}
-
-#pragma mark - Quartz 2D
+#pragma mark - Create the PDF with Quartz 2D
 
 - (void)writeToTextFile
 {
@@ -416,7 +264,7 @@
     
     // write to text file
     NSError *error;
-    NSString *textPath = [self.pdfClient documentsPathForFileName:@"scanned.txt"];
+    NSString *textPath = [Utility documentsPathForFileName:@"scanned.txt"];
     [self.recognizedImage.text writeToFile:textPath atomically:YES encoding:NSUTF8StringEncoding error:&error];
     
     // write to pdf file
@@ -424,59 +272,6 @@
 }
 
 #pragma mark - Source
-
-- (void)chooseSource
-{
-    // create controller
-    UIAlertController *ac = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Source", @"")
-                                                                message:nil
-                                                         preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    //create actions
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        // only show camera option if available
-        UIAlertAction *camera = [UIAlertAction actionWithTitle:NSLocalizedString(@"Camera", @"") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [self takePhoto];
-        }];
-        [ac addAction:camera];
-    }
-    UIAlertAction *library = [UIAlertAction actionWithTitle:NSLocalizedString(@"Library", @"") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self openLibrary];
-    }];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {}];
-    
-    // add actions
-    [ac addAction:library];
-    [ac addAction:cancel];
-    
-    // show controller
-    [self presentViewController:ac animated:YES completion:nil];
-}
-
-- (void)chooseAction
-{
-    // create controller
-    UIAlertController *ac = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Action", @"")
-                                                                message:nil
-                                                         preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    // create actions
-    UIAlertAction *scan = [UIAlertAction actionWithTitle:NSLocalizedString(@"Scan", @"") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        NSLog(@"Scan all images.");
-    }];
-    UIAlertAction *send = [UIAlertAction actionWithTitle:NSLocalizedString(@"Send", @"") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self sendText];
-    }];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {}];
-    
-    // add actions
-    [ac addAction:scan];
-    [ac addAction:send];
-    [ac addAction:cancel];
-    
-    // show controller
-    [self presentViewController:ac animated:YES completion:nil];
-}
 
 - (void)openLibrary
 {
@@ -486,25 +281,61 @@
     [self presentViewController:self.imagePicker animated:YES completion:nil];
 }
 
-- (void)takePhoto
+- (void)chooseSource
 {
-    self.imagePicker = [[UIImagePickerController alloc] init];
-    self.imagePicker.delegate = self;
-    self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    self.imagePicker.allowsEditing = NO;
-    //self.imagePicker.showsCameraControls = YES;
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        // Show the ActionSheet with the library option
+        [self showActionSheetWithTitle:@"Source" option:@"Library" method:@selector(openLibrary)];
+    }
     
-    self.imagePicker.modalPresentationStyle = UIModalPresentationFullScreen;
-    
-    // TODO: Problem "Snapshotting a view that has not been rendered results in an empty snapshot."
-    [self presentViewController:self.imagePicker animated:YES completion:nil];
+}
+
+- (void)chooseAction
+{
+    // TODO: Specify the selector to create the PDF
+    //[self showActionSheetWithTitle:@"Action" option:@"Create PDF" method:@selector(createPDFForText:)]
 }
 
 #pragma mark - UIAlertController
 
+- (void)showActionSheetWithTitle:(NSString *)title option:(NSString *)option method:(SEL)method
+{
+    // Ask the controller for the C function pointer of the specified SEL
+    // stackoverflow.com/questions/7017281/performselector-may-cause-a-leak-because-its-selector-is-unknown
+    // Thanks to SO user wbyoung!
+    IMP imp = [self methodForSelector:method];
+    void (*func)(id, SEL) = (void *)imp;
+    
+    // Create the AlertController
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:
+                                                                         NSLocalizedString(@"%@", @""),
+                                                                         title]
+                                                                message:nil
+                                                         preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    // Create the action for the AlertController
+    UIAlertAction *alertAction = [UIAlertAction actionWithTitle:[NSString stringWithFormat:
+                                                                 NSLocalizedString(@"%@", @""),
+                                                                 option]
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction *action) {
+        func(self, method);
+    }];
+    
+    // Cancel action
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {}];
+    
+    // Add the actions
+    [ac addAction:alertAction];
+    [ac addAction:cancel];
+    
+    // Show the controller
+    [self presentViewController:ac animated:YES completion:nil];
+}
+
 - (void)showAlertControllerStyleAlertWithTitle:(NSString *)title message:(NSString *)message
 {
-    // create controller
+    // Create the controller
     UIAlertController *ac = [UIAlertController alertControllerWithTitle:
                              [NSString stringWithFormat:NSLocalizedString(@"%@", @""), title]
                                                                 message:
@@ -512,38 +343,24 @@
                                                          preferredStyle:
                              UIAlertControllerStyleAlert];
     
-    // create action
+    // Create the action
     UIAlertAction *action = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {}];
     
-    // add action
+    // Add the action
     [ac addAction:action];
     
-    // show controller
+    // Show the controller
     [self presentViewController:ac animated:YES completion:nil];
-}
-
-#pragma mark - MBProgressHUD
-
-- (MBProgressHUD *)createProgressHUD
-{
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelColor = [UIColor colorWithWhite:0.9 alpha:0.7];
-    hud.labelFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:15];
-    hud.labelText = NSLocalizedString(@"Scanning...", @"");
-    hud.backgroundColor = [UIColor colorWithWhite:0.1f alpha:0.3f];
-    return hud;
 }
 
 #pragma mark - Memory Management
 
 - (void)cleanUp
 {
-    // free memory
+    // Free the memory, free it!
     self.imageToRecognize = nil;
     self.recognizedImage = nil;
     self.imagePicker = nil;
-    self.client = nil;
 }
 
 - (void)didReceiveMemoryWarning

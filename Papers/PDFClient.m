@@ -31,7 +31,7 @@
     
     // string to draw and filename
     CFStringRef stringRef = (__bridge CFStringRef)textToDraw;
-    NSString *pdfFileName = [self documentsPathForFileName:@"scannedText.PDF"];
+    NSString *pdfFileName = [Utility documentsPathForFileName:@"scannedText.PDF"];
     
     // core text frameset
     CFAttributedStringRef currentText = CFAttributedStringCreate(NULL, stringRef, NULL);

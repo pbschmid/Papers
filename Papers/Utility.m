@@ -7,16 +7,30 @@
 //
 
 #import "Utility.h"
+#import "MBProgressHUD.h"
 
 @implementation Utility
 
-#pragma mark - Helper methods
+#pragma mark - Documents Helper
 
 + (NSString *)documentsPathForFileName:(NSString *)name
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsPath = [paths objectAtIndex:0];
     return [documentsPath stringByAppendingPathComponent:name];
+}
+
+#pragma mark - MBProgressHUD
+
++ (MBProgressHUD *)createProgressHUDForView:(UIView *)sourceView
+{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:sourceView animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelColor = [UIColor colorWithWhite:0.9 alpha:0.7];
+    hud.labelFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:15];
+    hud.labelText = NSLocalizedString(@"Scanning...", @"");
+    hud.backgroundColor = [UIColor colorWithWhite:0.1f alpha:0.3f];
+    return hud;
 }
 
 @end
