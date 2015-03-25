@@ -20,21 +20,38 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    // TabBarController
-    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
-    UINavigationController *nvc1 = tabBarController.viewControllers[0];
-    UINavigationController *nvc2 = tabBarController.viewControllers[1];
+    // TabBarController, NavigationControllers
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    UINavigationController *nvc1 = [[UINavigationController alloc] init];
+    UINavigationController *nvc2 = [[UINavigationController alloc] init];
     
     // ViewControllers
     PapersViewController *pvc1 = [[PapersViewController alloc] init];
     PDFViewController *pvc2 = [[PDFViewController alloc] init];
-    nvc1.viewControllers = [NSArray arrayWithObject:pvc1];
-    nvc2.viewControllers = [NSArray arrayWithObject:pvc2];
+    [nvc1 setViewControllers:[NSArray arrayWithObject:pvc1]];
+    [nvc2 setViewControllers:[NSArray arrayWithObject:pvc2]];
+    
+    // RootViewController
+    [tabBarController setViewControllers:[NSArray arrayWithObjects:nvc1, nvc2, nil]];
+    [self.window setRootViewController:tabBarController];
+    [self customizeAppearance];
     
     // MagicalRecord
     [MagicalRecord setupCoreDataStackWithStoreNamed:@"ImageModel"];
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void)customizeAppearance
+{
+    [[UITabBar appearance] setBarTintColor:[UIColor colorWithRed:138/255.0f green:90/255.0f
+                                                            blue:56/255.0f alpha:0.5f]];
+    [[UITabBar appearance] setTintColor:[UIColor colorWithRed:45/255.0f green:29/255.0f
+                                                         blue:19/255.0f alpha:1.0f]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:138/255.0f green:90/255.0f
+                                                                   blue:56/255.0f alpha:1.0f]];
+    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:45/255.0f green:29/255.0f
+                                                                blue:19/255.0f alpha:1.0f]];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

@@ -66,15 +66,6 @@
     return ac;
 }
 
-#pragma mark - Documents Helper
-
-+ (NSString *)documentsPathForFileName:(NSString *)name
-{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsPath = [paths objectAtIndex:0];
-    return [documentsPath stringByAppendingPathComponent:name];
-}
-
 #pragma mark - MBProgressHUD
 
 + (MBProgressHUD *)createProgressHUDForView:(UIView *)sourceView
@@ -86,6 +77,15 @@
     hud.labelText = NSLocalizedString(@"Scanning...", @"");
     hud.backgroundColor = [UIColor colorWithWhite:0.1f alpha:0.3f];
     return hud;
+}
+
+#pragma mark - Documents Helper
+
++ (NSString *)documentsPathForFileName:(NSString *)name
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0];
+    return [documentsPath stringByAppendingPathComponent:name];
 }
 
 @end
