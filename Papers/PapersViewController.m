@@ -174,6 +174,9 @@
     Image *image = self.images[indexPath.row];
     self.recognizedImage = image;
     NSString *imageURL = image.imageDetails.path;
+    // TODO: IMAGE URL!!!
+    NSLog(@"Loading image URL: %@", imageURL);
+    
     [self loadImageForAssetURL:[NSURL URLWithString:imageURL]];
     // start scanning process
     [self checkForScanning];
@@ -218,27 +221,26 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    // TODO: Saving image doesn't work.
     // check source type of image picker
     if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+        UIImage *imageToSave = [info valueForKey:UIImagePickerControllerOriginalImage];
+        NSData *imageData = UIImagePNGRepresentation(imageToSave);
+        NSString *imagePath = [self.pdfClient documentsPathForFileName:@"savedImage.png"];
+        NSLog(@"WRITING Image to PATH: %@", imagePath);
+        [imageData writeToFile:imagePath atomically:YES];
+        
         
         // save image to photos if camera was used
-        UIImage *image = info[UIImagePickerControllerOriginalImage];
-        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-        [library writeImageToSavedPhotosAlbum:[image CGImage]
-                                  orientation:(ALAssetOrientation)[image imageOrientation]
-                              completionBlock:^(NSURL *assetURL, NSError *error) {
-                                  if (error) {
-                                      NSLog(@"Error saving image: %@", [error userInfo]);
-                                  } else {
-                                      NSLog(@"Successfully saved image.");
-                                  }
-                              }];
+        /*UIImage *imageToSave = [info valueForKey:UIImagePickerControllerOriginalImage];
+        UIImageWriteToSavedPhotosAlbum(imageToSave, self,
+                                       @selector(image:didFinishSavingWithError:contextInfo:), nil);*/
     }
     
     // get asset URL from image picker
     NSDate *currentDate = [NSDate date];
-    NSURL *imageURL = info[UIImagePickerControllerReferenceURL];
+    NSURL *imageURL = [info valueForKey:UIImagePickerControllerReferenceURL];
+    
+    // dismiss image picker
     [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
     self.imagePicker = nil;
     
@@ -248,9 +250,31 @@
     image.text = [NSString stringWithFormat:@""];
     image.imageDetails.scanned = [NSNumber numberWithBool:NO];
     image.imageDetails.date = currentDate;
-    image.imageDetails.path = imageURL.absoluteString;
+    image.imageDetails.path = [imageURL absoluteString];
     [self saveContext];
     [self.tableView reloadData];
+    
+    
+    
+    /*ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+     [library writeImageToSavedPhotosAlbum:[image CGImage]
+     orientation:(ALAssetOrientation)[image imageOrientation]
+     completionBlock:^(NSURL *assetURL, NSError *error) {
+     if (error) {
+     NSLog(@"Error saving image: %@", [error userInfo]);
+     } else {
+     NSLog(@"Successfully saved image.");
+     }
+     }];*/
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    if (error) {
+        NSLog(@"Error saving image: %@", [error userInfo]);
+    } else {
+        NSLog(@"Image successfully saved.");
+    }
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -263,7 +287,11 @@
 
 - (void)loadImageForAssetURL:(NSURL *)url
 {
-    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    NSString *imagePath = [self.pdfClient documentsPathForFileName:@"savedImage.png"];
+    self.imageToRecognize = [UIImage imageWithContentsOfFile:imagePath];
+    NSLog(@"Loaded: IMAGE %@", [self.imageToRecognize description]);
+    
+    /*ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
     [library assetForURL:url resultBlock:^(ALAsset *asset) {
         // set image to scan
         self.imageToRecognize = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage];
@@ -271,7 +299,7 @@
         if (error) {
             NSLog(@"Error loading image: %@", [error userInfo]);
         }
-    }];
+    }];*/
 }
 
 #pragma mark - SendingClient
@@ -390,6 +418,9 @@
     NSError *error;
     NSString *textPath = [self.pdfClient documentsPathForFileName:@"scanned.txt"];
     [self.recognizedImage.text writeToFile:textPath atomically:YES encoding:NSUTF8StringEncoding error:&error];
+    
+    // write to pdf file
+    [self.pdfClient createPDFForText:self.recognizedImage.text];
 }
 
 #pragma mark - Source
@@ -460,6 +491,12 @@
     self.imagePicker = [[UIImagePickerController alloc] init];
     self.imagePicker.delegate = self;
     self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    self.imagePicker.allowsEditing = NO;
+    //self.imagePicker.showsCameraControls = YES;
+    
+    self.imagePicker.modalPresentationStyle = UIModalPresentationFullScreen;
+    
+    // TODO: Problem "Snapshotting a view that has not been rendered results in an empty snapshot."
     [self presentViewController:self.imagePicker animated:YES completion:nil];
 }
 

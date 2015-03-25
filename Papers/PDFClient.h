@@ -11,7 +11,7 @@
 @interface PDFClient : NSObject
 
 + (PDFClient *)sharedPDFClient;
-- (void)createPDF;
+- (void)createPDFForText:(NSString *)text;
 - (NSString *)documentsPathForFileName:(NSString *)name;
 
 @end
