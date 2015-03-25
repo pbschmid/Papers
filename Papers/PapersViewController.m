@@ -285,7 +285,7 @@
 {
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
         // Show the ActionSheet with the library option
-        UIAlertController *alertController = [Utility showActionSheetWithTitle:@"Source" name:@"Library" method:@selector(openLibrary)];
+        UIAlertController *alertController = [self showActionSheetWithTitle:@"Source" name:@"Library" method:@selector(openLibrary)];
         [self presentViewController:alertController animated:YES completion:nil];
     }
     
@@ -294,8 +294,63 @@
 - (void)chooseAction
 {
     // Show the ActionSheet with the option to create the PDF
-    UIAlertController *alertController = [Utility showActionSheetWithTitle:@"Action" name:@"Create PDF" method:@selector(writeToTextFile)];
+    UIAlertController *alertController = [self showActionSheetWithTitle:@"Action" name:@"Create PDF" method:@selector(writeToTextFile)];
     [self presentViewController:alertController animated:YES completion:nil];
+}
+
+#pragma mark - UIAlertController
+
+- (UIAlertController *)showActionSheetWithTitle:(NSString *)title name:(NSString *)name method:(SEL)method
+{
+    // Ask the controller for the C function pointer of the specified SEL
+    // stackoverflow.com/questions/7017281/performselector-may-cause-a-leak-because-its-selector-is-unknown
+    // Thanks to SO user wbyoung!
+    IMP imp = [self methodForSelector:method];
+    void (*func)(id, SEL) = (void *)imp;
+    
+    // Create the AlertController
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:
+                                                                         NSLocalizedString(@"%@", @""),
+                                                                         title]
+                                                                message:nil
+                                                         preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    // Create the action for the AlertController
+    UIAlertAction *alertAction = [UIAlertAction actionWithTitle:[NSString stringWithFormat:
+                                                                 NSLocalizedString(@"%@", @""),
+                                                                 name]
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction *action) {
+                                                            func(self, method);
+                                                        }];
+    
+    // Cancel action
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {}];
+    
+    // Add the actions
+    [ac addAction:alertAction];
+    [ac addAction:cancel];
+    
+    return ac;
+}
+
+- (UIAlertController *)showAlertViewWithTitle:(NSString *)title message:(NSString *)message
+{
+    // Create the controller
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:
+                             [NSString stringWithFormat:NSLocalizedString(@"%@", @""), title]
+                                                                message:
+                             [NSString stringWithFormat:NSLocalizedString(@"%@", @""), message]
+                                                         preferredStyle:
+                             UIAlertControllerStyleAlert];
+    
+    // Create the action
+    UIAlertAction *action = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {}];
+    
+    // Add the action
+    [ac addAction:action];
+    
+    return ac;
 }
 
 #pragma mark - Memory Management

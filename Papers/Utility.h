@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+@class MBProgressHUD;
+
 @interface Utility : NSObject
 
-+ (UIAlertController *)showActionSheetWithTitle:(NSString *)title name:(NSString *)name method:(SEL)method;
-+ (UIAlertController *)showAlertViewWithTitle:(NSString *)title message:(NSString *)message;
++ (MBProgressHUD *)createProgressHUDForView:(UIView *)sourceView;
 + (NSString *)documentsPathForFileName:(NSString *)name;
 
 @end

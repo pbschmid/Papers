@@ -44,14 +44,14 @@
 
 - (void)customizeAppearance
 {
-    [[UITabBar appearance] setBarTintColor:[UIColor colorWithRed:138/255.0f green:90/255.0f
-                                                            blue:56/255.0f alpha:0.5f]];
-    [[UITabBar appearance] setTintColor:[UIColor colorWithRed:45/255.0f green:29/255.0f
-                                                         blue:19/255.0f alpha:1.0f]];
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:138/255.0f green:90/255.0f
-                                                                   blue:56/255.0f alpha:1.0f]];
-    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:45/255.0f green:29/255.0f
-                                                                blue:19/255.0f alpha:1.0f]];
+    UIColor *bgColor = [UIColor colorWithRed:222/255.0f green:184/255.0f blue:135/255.0f alpha:1.0f];
+    UIColor *textColor = [UIColor colorWithWhite:0.1f alpha:0.7f];
+    
+    [[UITabBar appearance] setBarTintColor:bgColor];
+    [[UITabBar appearance] setTintColor:textColor];
+    //[[UITabBar appearance] setTranslucent:YES];
+    [[UINavigationBar appearance] setBarTintColor:bgColor];
+    [[UINavigationBar appearance] setTintColor:textColor];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
