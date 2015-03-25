@@ -12,6 +12,5 @@
 
 + (PDFClient *)sharedPDFClient;
 - (void)createPDFForText:(NSString *)text;
-- (NSString *)documentsPathForFileName:(NSString *)name;
 
 @end

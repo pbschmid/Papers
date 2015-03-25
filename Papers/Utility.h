@@ -10,4 +10,6 @@
 
 @interface Utility : NSObject
 
+- (NSString *)documentsPathForFileName:(NSString *)name;
+
 @end

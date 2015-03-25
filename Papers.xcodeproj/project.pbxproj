@@ -29,7 +29,6 @@
 		377AE24B1A7FFC1200F4C126 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 377AE24A1A7FFC1200F4C126 /* Images.xcassets */; };
 		377AE25A1A7FFC1300F4C126 /* PapersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AE2591A7FFC1300F4C126 /* PapersTests.m */; };
 		377AE2661A7FFD7400F4C126 /* PapersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AE2651A7FFD7400F4C126 /* PapersViewController.m */; };
-		377AE26B1A7FFDB500F4C126 /* TesseractClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AE26A1A7FFDB500F4C126 /* TesseractClient.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,8 +79,6 @@
 		377AE2631A7FFCDA00F4C126 /* Papers-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Papers-Prefix.pch"; sourceTree = "<group>"; };
 		377AE2641A7FFD7400F4C126 /* PapersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PapersViewController.h; sourceTree = "<group>"; };
 		377AE2651A7FFD7400F4C126 /* PapersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PapersViewController.m; sourceTree = "<group>"; };
-		377AE2691A7FFDB500F4C126 /* TesseractClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TesseractClient.h; sourceTree = "<group>"; };
-		377AE26A1A7FFDB500F4C126 /* TesseractClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TesseractClient.m; sourceTree = "<group>"; };
 		DA4DEAF5E3A5D0C45904BA43 /* libPods-Papers.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Papers.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2D6C0852AEC27A73EFD1C78 /* Pods-Papers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Papers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Papers/Pods-Papers.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -228,8 +225,6 @@
 				3723BD8A1A8005C000AB36F2 /* Image.m */,
 				3723BD861A8005BF00AB36F2 /* ImageDetails.h */,
 				3723BD871A8005BF00AB36F2 /* ImageDetails.m */,
-				377AE2691A7FFDB500F4C126 /* TesseractClient.h */,
-				377AE26A1A7FFDB500F4C126 /* TesseractClient.m */,
 				376919CA1AC34F7B00230E68 /* ImageProcessor.h */,
 				376919CB1AC34F7B00230E68 /* ImageProcessor.m */,
 				372B4A3B1AA8C75A00B38632 /* PDFClient.h */,
@@ -393,7 +388,6 @@
 				377AE2431A7FFC1200F4C126 /* AppDelegate.m in Sources */,
 				376919C31AC34C9A00230E68 /* DetailViewController.m in Sources */,
 				3723BD881A8005BF00AB36F2 /* ImageDetails.m in Sources */,
-				377AE26B1A7FFDB500F4C126 /* TesseractClient.m in Sources */,
 				376919CC1AC34F7B00230E68 /* ImageProcessor.m in Sources */,
 				377AE2661A7FFD7400F4C126 /* PapersViewController.m in Sources */,
 				377AE2401A7FFC1200F4C126 /* main.m in Sources */,
