@@ -12,7 +12,7 @@
 
 #pragma mark - Helper methods
 
-- (NSString *)documentsPathForFileName:(NSString *)name
++ (NSString *)documentsPathForFileName:(NSString *)name
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsPath = [paths objectAtIndex:0];
