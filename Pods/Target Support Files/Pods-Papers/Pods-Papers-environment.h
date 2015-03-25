@@ -30,9 +30,3 @@
 #define COCOAPODS_VERSION_MINOR_MagicalRecord_Core 2
 #define COCOAPODS_VERSION_PATCH_MagicalRecord_Core 0
 
-// TesseractOCRiOS
-#define COCOAPODS_POD_AVAILABLE_TesseractOCRiOS
-#define COCOAPODS_VERSION_MAJOR_TesseractOCRiOS 3
-#define COCOAPODS_VERSION_MINOR_TesseractOCRiOS 4
-#define COCOAPODS_VERSION_PATCH_TesseractOCRiOS 0
-
