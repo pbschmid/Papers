@@ -10,4 +10,6 @@
 
 @interface DropboxClient : NSObject
 
++ (DropboxClient *)sharedDropboxClient;
+
 @end

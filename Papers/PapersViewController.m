@@ -294,7 +294,7 @@
 - (void)chooseAction
 {
     // Show the ActionSheet with the option to create the PDF
-    UIAlertController *alertController = [Utility showActionSheetWithTitle:@"Action" name:@"Create PDF" method:@selector(createPDFForText:)];
+    UIAlertController *alertController = [Utility showActionSheetWithTitle:@"Action" name:@"Create PDF" method:@selector(writeToTextFile)];
     [self presentViewController:alertController animated:YES completion:nil];
 }
 

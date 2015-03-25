@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "PapersViewController.h"
+#import "PDFViewController.h"
 
 @interface AppDelegate ()
 
@@ -18,9 +19,19 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    PapersViewController *pvc = [[PapersViewController alloc] init];
-    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:pvc];
-    self.window.rootViewController = nvc;
+    
+    // TabBarController
+    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+    UINavigationController *nvc1 = tabBarController.viewControllers[0];
+    UINavigationController *nvc2 = tabBarController.viewControllers[1];
+    
+    // ViewControllers
+    PapersViewController *pvc1 = [[PapersViewController alloc] init];
+    PDFViewController *pvc2 = [[PDFViewController alloc] init];
+    nvc1.viewControllers = [NSArray arrayWithObject:pvc1];
+    nvc2.viewControllers = [NSArray arrayWithObject:pvc2];
+    
+    // MagicalRecord
     [MagicalRecord setupCoreDataStackWithStoreNamed:@"ImageModel"];
     [self.window makeKeyAndVisible];
     return YES;
