@@ -10,6 +10,8 @@
 
 @interface Utility : NSObject
 
++ (UIAlertController *)showActionSheetWithTitle:(NSString *)title name:(NSString *)name method:(SEL)method;
++ (UIAlertController *)showAlertViewWithTitle:(NSString *)title message:(NSString *)message;
 + (NSString *)documentsPathForFileName:(NSString *)name;
 
 @end
