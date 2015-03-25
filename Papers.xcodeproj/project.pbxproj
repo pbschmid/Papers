@@ -23,6 +23,7 @@
 		376919C61AC34CE100230E68 /* PDFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 376919C51AC34CE100230E68 /* PDFViewController.m */; };
 		376919C91AC34E1E00230E68 /* DropboxClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 376919C81AC34E1E00230E68 /* DropboxClient.m */; };
 		376919CC1AC34F7B00230E68 /* ImageProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 376919CB1AC34F7B00230E68 /* ImageProcessor.m */; };
+		376919CF1AC3500E00230E68 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 376919CE1AC3500E00230E68 /* Utility.m */; };
 		377AE2401A7FFC1200F4C126 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AE23F1A7FFC1200F4C126 /* main.m */; };
 		377AE2431A7FFC1200F4C126 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AE2421A7FFC1200F4C126 /* AppDelegate.m */; };
 		377AE24B1A7FFC1200F4C126 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 377AE24A1A7FFC1200F4C126 /* Images.xcassets */; };
@@ -65,6 +66,8 @@
 		376919C81AC34E1E00230E68 /* DropboxClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxClient.m; sourceTree = "<group>"; };
 		376919CA1AC34F7B00230E68 /* ImageProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageProcessor.h; sourceTree = "<group>"; };
 		376919CB1AC34F7B00230E68 /* ImageProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageProcessor.m; sourceTree = "<group>"; };
+		376919CD1AC3500E00230E68 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
+		376919CE1AC3500E00230E68 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 		377AE23A1A7FFC1200F4C126 /* Papers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Papers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		377AE23E1A7FFC1200F4C126 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		377AE23F1A7FFC1200F4C126 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -124,6 +127,15 @@
 			name = Launch;
 			sourceTree = "<group>";
 		};
+		376919D01AC3501900230E68 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				376919CD1AC3500E00230E68 /* Utility.h */,
+				376919CE1AC3500E00230E68 /* Utility.m */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		377AE2311A7FFC1200F4C126 = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +162,7 @@
 				3723BD911A8018CF00AB36F2 /* tessdata */,
 				3723BD901A80161C00AB36F2 /* Launch */,
 				377AE2681A7FFD8100F4C126 /* Delegate */,
+				376919D01AC3501900230E68 /* Helpers */,
 				377AE26C1A7FFDBA00F4C126 /* Model */,
 				377AE2671A7FFD7900F4C126 /* Controller */,
 				377AE24A1A7FFC1200F4C126 /* Images.xcassets */,
@@ -387,6 +400,7 @@
 				376919C91AC34E1E00230E68 /* DropboxClient.m in Sources */,
 				3723BD8B1A8005C000AB36F2 /* Image.m in Sources */,
 				372B4A3D1AA8C75A00B38632 /* PDFClient.m in Sources */,
+				376919CF1AC3500E00230E68 /* Utility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
