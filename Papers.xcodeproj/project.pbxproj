@@ -16,7 +16,6 @@
 		3723BD881A8005BF00AB36F2 /* ImageDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 3723BD871A8005BF00AB36F2 /* ImageDetails.m */; };
 		3723BD8B1A8005C000AB36F2 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 3723BD8A1A8005C000AB36F2 /* Image.m */; };
 		3723BD8F1A8015F800AB36F2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3723BD8E1A8015F800AB36F2 /* LaunchScreen.xib */; };
-		3723BD921A8018D000AB36F2 /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 3723BD911A8018CF00AB36F2 /* tessdata */; };
 		372B4A3A1AA8C6E400B38632 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 372B4A391AA8C6E400B38632 /* CoreText.framework */; };
 		372B4A3D1AA8C75A00B38632 /* PDFClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 372B4A3C1AA8C75A00B38632 /* PDFClient.m */; };
 		376919C31AC34C9A00230E68 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 376919C21AC34C9A00230E68 /* DetailViewController.m */; };
@@ -53,7 +52,6 @@
 		3723BD891A8005C000AB36F2 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
 		3723BD8A1A8005C000AB36F2 /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 		3723BD8E1A8015F800AB36F2 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
-		3723BD911A8018CF00AB36F2 /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
 		372B4A391AA8C6E400B38632 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		372B4A3B1AA8C75A00B38632 /* PDFClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFClient.h; sourceTree = "<group>"; };
 		372B4A3C1AA8C75A00B38632 /* PDFClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFClient.m; sourceTree = "<group>"; };
@@ -156,7 +154,6 @@
 		377AE23C1A7FFC1200F4C126 /* Papers */ = {
 			isa = PBXGroup;
 			children = (
-				3723BD911A8018CF00AB36F2 /* tessdata */,
 				3723BD901A80161C00AB36F2 /* Launch */,
 				377AE2681A7FFD8100F4C126 /* Delegate */,
 				376919D01AC3501900230E68 /* Helpers */,
@@ -332,7 +329,6 @@
 			files = (
 				3723BD8F1A8015F800AB36F2 /* LaunchScreen.xib in Resources */,
 				377AE24B1A7FFC1200F4C126 /* Images.xcassets in Resources */,
-				3723BD921A8018D000AB36F2 /* tessdata in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
