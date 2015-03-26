@@ -52,7 +52,7 @@
     self.view.backgroundColor = self.backgroundColor;
     
     // Navigation-Bar.
-    [self configureNavigationBar];
+    [self configureNavigationBarWithTitle:@"Papers"];
     
     // Table-View.
     [self configureTableView];
@@ -72,7 +72,7 @@
     [self.tableView reloadData];
 }
 
-- (void)configureNavigationBar
+- (void)configureNavigationBarWithTitle:(NSString *)title
 {
     self.navigationController.delegate = self;
     self.navigationController.navigationBar.tintColor = self.textColor;
@@ -82,7 +82,7 @@
     titleLabel.textColor = self.textColor;
     titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:25];
     titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.text = NSLocalizedString(@"Papers", @"");
+    titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@", @""), title];
     [titleLabel sizeToFit];
     self.navigationItem.titleView = titleLabel;
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];

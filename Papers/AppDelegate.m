@@ -20,16 +20,14 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    // TabBarController, NavigationControllers
+    // TabBarController, View Controllers
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    UINavigationController *nvc1 = [[UINavigationController alloc] init];
-    UINavigationController *nvc2 = [[UINavigationController alloc] init];
-    
-    // ViewControllers
     PapersViewController *pvc1 = [[PapersViewController alloc] init];
     PDFViewController *pvc2 = [[PDFViewController alloc] init];
-    [nvc1 setViewControllers:[NSArray arrayWithObject:pvc1]];
-    [nvc2 setViewControllers:[NSArray arrayWithObject:pvc2]];
+    
+    // NavigationControllers
+    UINavigationController *nvc1 = [[UINavigationController alloc] initWithRootViewController:pvc1];
+    UINavigationController *nvc2 = [[UINavigationController alloc] initWithRootViewController:pvc2];
     
     // RootViewController
     [tabBarController setViewControllers:[NSArray arrayWithObjects:nvc1, nvc2, nil]];
@@ -44,12 +42,16 @@
 
 - (void)customizeAppearance
 {
+    // UITabBar Colors
     UIColor *bgColor = [UIColor colorWithRed:222/255.0f green:184/255.0f blue:135/255.0f alpha:1.0f];
     UIColor *textColor = [UIColor colorWithWhite:0.1f alpha:0.7f];
     
+    // UITabBar Appearance
     [[UITabBar appearance] setBarTintColor:bgColor];
     [[UITabBar appearance] setTintColor:textColor];
-    //[[UITabBar appearance] setTranslucent:YES];
+    [[UITabBar appearance] setTranslucent:YES];
+    
+    // NavigationBar Appearance
     [[UINavigationBar appearance] setBarTintColor:bgColor];
     [[UINavigationBar appearance] setTintColor:textColor];
 }
