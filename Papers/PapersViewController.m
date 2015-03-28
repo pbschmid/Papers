@@ -8,6 +8,7 @@
 
 #import "PapersViewController.h"
 #import "DetailViewController.h"
+#import "MBProgressHUD.h"
 #import "ImageProcessor.h"
 #import <Photos/Photos.h>
 #import "ImageDetails.h"
@@ -18,7 +19,7 @@
 @interface PapersViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
-@property (nonatomic, strong) NSMutableArray *imagesProcessed;
+@property (nonatomic, strong) NSMutableArray *imagesForPDF;
 @property (nonatomic, strong) NSMutableArray *images;
 @property (nonatomic, strong) Image *image;
 
@@ -231,8 +232,6 @@
     // save asset URL to context
     Image *image = [Image MR_createEntity];
     image.imageDetails = [ImageDetails MR_createEntity];
-    image.text = [NSString stringWithFormat:@""];
-    image.imageDetails.scanned = [NSNumber numberWithBool:NO];
     image.imageDetails.date = currentDate;
     image.imageDetails.path = [imageURL absoluteString];
     [self saveContext];
@@ -269,14 +268,34 @@
 
 - (void)prepareImagesForPDF
 {
-    // Load all images into memory
-    
-    // Preprocess images with GPUImage
+    // Initialize the ImageProcessor
     self.imageProcessor = [ImageProcessor sharedImageProcessor];
+    self.imagesForPDF = [[NSMutableArray alloc] init];
     
+    for (Image *img in self.images) {
+        // Load image into memory
+        NSURL *imageURL = [NSURL URLWithString:img.imageDetails.path];
+        UIImage *imageToProcess = [self loadImageForAssetURL:imageURL];
+        
+        // Preprocess image with GPUImage
+        UIImage *processedImage = [self.imageProcessor preprocessSourceImage:imageToProcess];
+        [self.imagesForPDF addObject:processedImage];
+    }
 }
 
 #pragma mark - Create the PDF with Quartz 2D
+
+- (void)startCreatingPDFFromImages
+{
+    // Prepare the images with GPUImage Tresholding
+    MBProgressHUD *hud = [Utility createProgressHUDForView:self.view withTitle:@"Preparing..."];
+    [hud showAnimated:YES whileExecutingBlock:^{
+        [self prepareImagesForPDF];
+    }];
+    
+    // Create the PDF with the processed images
+    [self createPDFWithImages];
+}
 
 - (void)createPDFWithImages
 {
@@ -285,7 +304,7 @@
     NSString *filePath = [Utility documentsPathForFileName:@"paper.pdf"];
     
     // create PDF from images
-    [self.pdfClient createPDFForTitle:filePath withImages:self.images];
+    [self.pdfClient createPDFForTitle:filePath withImages:self.imagesForPDF];
 }
 
 #pragma mark - Source
@@ -311,7 +330,7 @@
 - (void)chooseAction
 {
     // Show the ActionSheet with the option to create the PDF
-    UIAlertController *alertController = [self showActionSheetWithTitle:@"Action" name:@"Create PDF" method:@selector(createPDFWithImages)];
+    UIAlertController *alertController = [self showActionSheetWithTitle:@"Action" name:@"Create PDF" method:@selector(startCreatingPDFFromImages)];
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
@@ -376,6 +395,8 @@
 {
     // Free memory
     self.imagePicker = nil;
+    self.imageProcessor = nil;
+    self.pdfClient = nil;
 }
 
 - (void)didReceiveMemoryWarning

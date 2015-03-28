@@ -12,11 +12,11 @@
 		3723BD7E1A8000A100AB36F2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3723BD7D1A8000A100AB36F2 /* UIKit.framework */; };
 		3723BD801A8000AF00AB36F2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3723BD7F1A8000AF00AB36F2 /* CoreGraphics.framework */; };
 		3723BD851A80050E00AB36F2 /* ImageModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3723BD831A80050E00AB36F2 /* ImageModel.xcdatamodeld */; };
-		3723BD881A8005BF00AB36F2 /* ImageDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 3723BD871A8005BF00AB36F2 /* ImageDetails.m */; };
-		3723BD8B1A8005C000AB36F2 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 3723BD8A1A8005C000AB36F2 /* Image.m */; };
 		3723BD8F1A8015F800AB36F2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3723BD8E1A8015F800AB36F2 /* LaunchScreen.xib */; };
 		372B4A3D1AA8C75A00B38632 /* PDFClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 372B4A3C1AA8C75A00B38632 /* PDFClient.m */; };
 		372ED96E1AC702920074789D /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 372ED96D1AC702920074789D /* Photos.framework */; };
+		372ED9711AC71B740074789D /* PDF.m in Sources */ = {isa = PBXBuildFile; fileRef = 372ED9701AC71B740074789D /* PDF.m */; };
+		372ED9741AC71B760074789D /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 372ED9731AC71B760074789D /* Image.m */; };
 		376919C31AC34C9A00230E68 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 376919C21AC34C9A00230E68 /* DetailViewController.m */; };
 		376919C61AC34CE100230E68 /* PDFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 376919C51AC34CE100230E68 /* PDFViewController.m */; };
 		376919C91AC34E1E00230E68 /* DropboxClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 376919C81AC34E1E00230E68 /* DropboxClient.m */; };
@@ -46,15 +46,15 @@
 		3723BD7F1A8000AF00AB36F2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		3723BD811A8000B700AB36F2 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		3723BD841A80050E00AB36F2 /* ImageModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ImageModel.xcdatamodel; sourceTree = "<group>"; };
-		3723BD861A8005BF00AB36F2 /* ImageDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDetails.h; sourceTree = "<group>"; };
-		3723BD871A8005BF00AB36F2 /* ImageDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDetails.m; sourceTree = "<group>"; };
-		3723BD891A8005C000AB36F2 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
-		3723BD8A1A8005C000AB36F2 /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 		3723BD8E1A8015F800AB36F2 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		372B4A391AA8C6E400B38632 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		372B4A3B1AA8C75A00B38632 /* PDFClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFClient.h; sourceTree = "<group>"; };
 		372B4A3C1AA8C75A00B38632 /* PDFClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFClient.m; sourceTree = "<group>"; };
 		372ED96D1AC702920074789D /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		372ED96F1AC71B740074789D /* PDF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDF.h; sourceTree = "<group>"; };
+		372ED9701AC71B740074789D /* PDF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDF.m; sourceTree = "<group>"; };
+		372ED9721AC71B760074789D /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
+		372ED9731AC71B760074789D /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 		376919C11AC34C9A00230E68 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		376919C21AC34C9A00230E68 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		376919C41AC34CE100230E68 /* PDFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFViewController.h; sourceTree = "<group>"; };
@@ -217,10 +217,10 @@
 			isa = PBXGroup;
 			children = (
 				3723BD831A80050E00AB36F2 /* ImageModel.xcdatamodeld */,
-				3723BD891A8005C000AB36F2 /* Image.h */,
-				3723BD8A1A8005C000AB36F2 /* Image.m */,
-				3723BD861A8005BF00AB36F2 /* ImageDetails.h */,
-				3723BD871A8005BF00AB36F2 /* ImageDetails.m */,
+				372ED9721AC71B760074789D /* Image.h */,
+				372ED9731AC71B760074789D /* Image.m */,
+				372ED96F1AC71B740074789D /* PDF.h */,
+				372ED9701AC71B740074789D /* PDF.m */,
 				376919CA1AC34F7B00230E68 /* ImageProcessor.h */,
 				376919CB1AC34F7B00230E68 /* ImageProcessor.m */,
 				372B4A3B1AA8C75A00B38632 /* PDFClient.h */,
@@ -379,16 +379,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				372ED9711AC71B740074789D /* PDF.m in Sources */,
 				3723BD851A80050E00AB36F2 /* ImageModel.xcdatamodeld in Sources */,
 				376919C61AC34CE100230E68 /* PDFViewController.m in Sources */,
 				377AE2431A7FFC1200F4C126 /* AppDelegate.m in Sources */,
 				376919C31AC34C9A00230E68 /* DetailViewController.m in Sources */,
-				3723BD881A8005BF00AB36F2 /* ImageDetails.m in Sources */,
 				376919CC1AC34F7B00230E68 /* ImageProcessor.m in Sources */,
 				377AE2661A7FFD7400F4C126 /* PapersViewController.m in Sources */,
 				377AE2401A7FFC1200F4C126 /* main.m in Sources */,
 				376919C91AC34E1E00230E68 /* DropboxClient.m in Sources */,
-				3723BD8B1A8005C000AB36F2 /* Image.m in Sources */,
+				372ED9741AC71B760074789D /* Image.m in Sources */,
 				372B4A3D1AA8C75A00B38632 /* PDFClient.m in Sources */,
 				376919CF1AC3500E00230E68 /* Utility.m in Sources */,
 			);
