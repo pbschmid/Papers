@@ -10,4 +10,6 @@
 
 @interface DetailViewController : UIViewController
 
+@property (nonatomic, strong) NSString *filePath;
+
 @end

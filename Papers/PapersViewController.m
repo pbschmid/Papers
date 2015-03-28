@@ -257,18 +257,14 @@
 
 #pragma mark - Create the PDF with Quartz 2D
 
-- (void)writeToTextFile
+- (void)createPDFWithImages
 {
     // initialize pdf client
     self.pdfClient = [PDFClient sharedPDFClient];
+    NSString *filePath = [Utility documentsPathForFileName:@"scanned.txt"];
     
-    // write to text file
-    NSError *error;
-    NSString *textPath = [Utility documentsPathForFileName:@"scanned.txt"];
-    [self.recognizedImage.text writeToFile:textPath atomically:YES encoding:NSUTF8StringEncoding error:&error];
-    
-    // write to pdf file
-    //[self.pdfClient createPDFForText:self.recognizedImage.text];
+    // create PDF from images
+    [self.pdfClient createPDFForTitle:filePath withImages:self.images];
 }
 
 #pragma mark - Source
@@ -294,7 +290,7 @@
 - (void)chooseAction
 {
     // Show the ActionSheet with the option to create the PDF
-    UIAlertController *alertController = [self showActionSheetWithTitle:@"Action" name:@"Create PDF" method:@selector(writeToTextFile)];
+    UIAlertController *alertController = [self showActionSheetWithTitle:@"Action" name:@"Create PDF" method:@selector(createPDFWithImages)];
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
