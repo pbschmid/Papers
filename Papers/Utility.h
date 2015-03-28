@@ -12,7 +12,7 @@
 
 @interface Utility : NSObject
 
-+ (MBProgressHUD *)createProgressHUDForView:(UIView *)sourceView;
++ (MBProgressHUD *)createProgressHUDForView:(UIView *)sourceView withTitle:(NSString *)title;
 + (NSString *)documentsPathForFileName:(NSString *)name;
 
 @end

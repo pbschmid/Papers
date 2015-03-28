@@ -35,8 +35,7 @@
 - (void)showPDFWithImages
 {
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-    NSURL *url = [NSURL fileURLWithPath:self.filePath];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    NSURLRequest *request = [NSURLRequest requestWithURL:self.imageURL];
     [webView setScalesPageToFit:YES];
     [webView loadRequest:request];
     

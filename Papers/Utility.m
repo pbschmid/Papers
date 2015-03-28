@@ -21,13 +21,13 @@
 
 #pragma mark - MBProgressHUD
 
-+ (MBProgressHUD *)createProgressHUDForView:(UIView *)sourceView
++ (MBProgressHUD *)createProgressHUDForView:(UIView *)sourceView withTitle:(NSString *)title
 {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:sourceView animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelColor = [UIColor colorWithWhite:0.9 alpha:0.7];
     hud.labelFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:15];
-    hud.labelText = NSLocalizedString(@"Scanning...", @"");
+    hud.labelText = [NSString stringWithFormat:NSLocalizedString(@"%@", @""), title];
     hud.backgroundColor = [UIColor colorWithWhite:0.1f alpha:0.3f];
     return hud;
 }

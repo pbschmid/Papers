@@ -6,18 +6,20 @@
 //  Copyright (c) 2015 Philippe Schmid. All rights reserved.
 //
 
-#import <AssetsLibrary/AssetsLibrary.h>
 #import "PapersViewController.h"
+#import "DetailViewController.h"
+#import "ImageProcessor.h"
+#import <Photos/Photos.h>
 #import "ImageDetails.h"
-#import "Image.h"
 #import "PDFClient.h"
+#import "Image.h"
+
 
 @interface PapersViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
-@property (nonatomic, strong) UIImage *imageToRecognize;
+@property (nonatomic, strong) NSMutableArray *imagesProcessed;
 @property (nonatomic, strong) NSMutableArray *images;
-@property (nonatomic, strong) Image *recognizedImage;
 @property (nonatomic, strong) Image *image;
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -25,6 +27,7 @@
 @property (nonatomic, strong) UIColor *textColor;
 
 @property (nonatomic, strong) PDFClient *pdfClient;
+@property (nonatomic, strong) ImageProcessor *imageProcessor;
 
 @end
 
@@ -167,13 +170,15 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    // Get the image.
+    // Get the image to show
     Image *image = self.images[indexPath.row];
-    self.recognizedImage = image;
-    NSString *imageURL = image.imageDetails.path;
-    [self loadImageForAssetURL:[NSURL URLWithString:imageURL]];
+    NSString *imagePath = image.imageDetails.path;
+    NSURL *imageURL = [NSURL URLWithString:imagePath];
     
-    // TODO: Show the image in the DetailViewController.
+    // Show the DetailViewController with the Image
+    DetailViewController *detailVC = [[DetailViewController alloc] init];
+    detailVC.imageURL = imageURL;
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -240,19 +245,35 @@
     self.imagePicker = nil;
 }
 
-#pragma mark - ALAssetsLibrary
+#pragma mark - Photos Framework
 
-- (void)loadImageForAssetURL:(NSURL *)url
+- (UIImage *)loadImageForAssetURL:(NSURL *)url
 {
-    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-    [library assetForURL:url resultBlock:^(ALAsset *asset) {
-        // set image to scan
-        self.imageToRecognize = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage];
-    } failureBlock:^(NSError *error) {
-        if (error) {
-            NSLog(@"Error loading image: %@", [error userInfo]);
-        }
-    }];
+    PHFetchResult *fetchResult = [PHAsset fetchAssetsWithALAssetURLs:@[url] options:nil];
+    PHAsset *asset = [fetchResult lastObject];
+    
+    __block UIImage *resultImage = nil;
+    PHImageManager *manager = [PHImageManager defaultManager];
+    [manager requestImageForAsset:asset
+                       targetSize:PHImageManagerMaximumSize
+                      contentMode:PHImageContentModeDefault
+                          options:nil
+                    resultHandler:^(UIImage *result, NSDictionary *info) {
+                        resultImage = result;
+                    }];
+    
+    return resultImage;
+}
+
+#pragma mark - Image Preprocessing
+
+- (void)prepareImagesForPDF
+{
+    // Load all images into memory
+    
+    // Preprocess images with GPUImage
+    self.imageProcessor = [ImageProcessor sharedImageProcessor];
+    
 }
 
 #pragma mark - Create the PDF with Quartz 2D
@@ -261,7 +282,7 @@
 {
     // initialize pdf client
     self.pdfClient = [PDFClient sharedPDFClient];
-    NSString *filePath = [Utility documentsPathForFileName:@"scanned.txt"];
+    NSString *filePath = [Utility documentsPathForFileName:@"paper.pdf"];
     
     // create PDF from images
     [self.pdfClient createPDFForTitle:filePath withImages:self.images];
@@ -353,9 +374,7 @@
 
 - (void)cleanUp
 {
-    // Free the memory, free it!
-    self.imageToRecognize = nil;
-    self.recognizedImage = nil;
+    // Free memory
     self.imagePicker = nil;
 }
 
