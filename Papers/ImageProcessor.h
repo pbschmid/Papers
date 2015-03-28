@@ -10,4 +10,7 @@
 
 @interface ImageProcessor : NSObject
 
++ (ImageProcessor *)sharedImageProcessor;
+- (UIImage *)preprocessSourceImage:(UIImage *)sourceImage;
+
 @end

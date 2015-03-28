@@ -7,7 +7,6 @@
 //
 
 #import "PDFClient.h"
-#import <CoreText/CoreText.h>
 
 @implementation PDFClient
 
@@ -25,50 +24,24 @@
 
 #pragma mark - PDF Creation
 
-- (void)createPDFForText:(NSString *)text
+- (void)createPDFForTitle:(NSString *)title withImages:(NSArray *)images
 {
-    NSString *textToDraw = @"Hello World";
+    // Create the PDF context using the default page size of 612 x 792
+    UIGraphicsBeginPDFContextToFile(title, CGRectZero, nil);
     
-    // string to draw and filename
-    CFStringRef stringRef = (__bridge CFStringRef)textToDraw;
-    NSString *pdfFileName = [Utility documentsPathForFileName:@"scannedText.PDF"];
+    // Prepare the frame for the images
+    CGRect frame = CGRectMake(0, 0, 612, 792);
     
-    // core text frameset
-    CFAttributedStringRef currentText = CFAttributedStringCreate(NULL, stringRef, NULL);
-    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString(currentText);
+    // Iterate over the images array
+    for (UIImage *image in images) {
+        // Begin a new PDF page
+        UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 612, 792), nil);
+        
+        // Draw every image to the PDF context
+        [image drawInRect:frame];
+    }
     
-    CGRect frameRect = CGRectMake(0, 0, 300, 50);
-    CGMutablePathRef framePath = CGPathCreateMutable();
-    CGPathAddRect(framePath, NULL, frameRect);
-    
-    // get the frame for rendering
-    CFRange currentRange = CFRangeMake(0, 0);
-    CTFrameRef frameRef = CTFramesetterCreateFrame(framesetter, currentRange, framePath, NULL);
-    CGPathRelease(framePath);
-    
-    // create pdf context with defaul page size 612 x 792
-    UIGraphicsBeginPDFContextToFile(pdfFileName, CGRectZero, nil);
-    
-    // new page beginning
-    UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 612, 792), nil);
-    
-    // get graphics context
-    CGContextRef currentContext = UIGraphicsGetCurrentContext();
-    
-    // core text drawing preparation
-    CGContextSetTextMatrix(currentContext, CGAffineTransformIdentity);
-    CGContextTranslateCTM(currentContext, 0, 100);
-    CGContextScaleCTM(currentContext, 1.0, -1.0);
-    
-    // draw the frame
-    CTFrameDraw(frameRef, currentContext);
-    
-    // cleanup
-    CFRelease(frameRef);
-    CFRelease(stringRef);
-    CFRelease(framesetter);
-    
-    // close context
+    // Close the PDF context and write the contents out
     UIGraphicsEndPDFContext();
 }
 

@@ -22,4 +22,6 @@
     return _sharedDropboxClient;
 }
 
+#pragma mark - Dropbox Client
+
 @end

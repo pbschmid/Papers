@@ -268,7 +268,7 @@
     [self.recognizedImage.text writeToFile:textPath atomically:YES encoding:NSUTF8StringEncoding error:&error];
     
     // write to pdf file
-    [self.pdfClient createPDFForText:self.recognizedImage.text];
+    //[self.pdfClient createPDFForText:self.recognizedImage.text];
 }
 
 #pragma mark - Source

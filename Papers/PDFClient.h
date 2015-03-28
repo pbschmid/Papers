@@ -11,6 +11,6 @@
 @interface PDFClient : NSObject
 
 + (PDFClient *)sharedPDFClient;
-- (void)createPDFForText:(NSString *)text;
+- (void)createPDFForTitle:(NSString *)title withImages:(NSArray *)images;
 
 @end

@@ -16,7 +16,6 @@
 		3723BD881A8005BF00AB36F2 /* ImageDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 3723BD871A8005BF00AB36F2 /* ImageDetails.m */; };
 		3723BD8B1A8005C000AB36F2 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 3723BD8A1A8005C000AB36F2 /* Image.m */; };
 		3723BD8F1A8015F800AB36F2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3723BD8E1A8015F800AB36F2 /* LaunchScreen.xib */; };
-		372B4A3A1AA8C6E400B38632 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 372B4A391AA8C6E400B38632 /* CoreText.framework */; };
 		372B4A3D1AA8C75A00B38632 /* PDFClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 372B4A3C1AA8C75A00B38632 /* PDFClient.m */; };
 		376919C31AC34C9A00230E68 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 376919C21AC34C9A00230E68 /* DetailViewController.m */; };
 		376919C61AC34CE100230E68 /* PDFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 376919C51AC34CE100230E68 /* PDFViewController.m */; };
@@ -86,7 +85,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				372B4A3A1AA8C6E400B38632 /* CoreText.framework in Frameworks */,
 				3723BD821A8000B700AB36F2 /* AssetsLibrary.framework in Frameworks */,
 				3723BD801A8000AF00AB36F2 /* CoreGraphics.framework in Frameworks */,
 				3723BD7E1A8000A100AB36F2 /* UIKit.framework in Frameworks */,
