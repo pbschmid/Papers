@@ -45,6 +45,19 @@
     self.allPDFs = [[PDF MR_findAll] mutableCopy];
 }
 
+#pragma mark - UIWebView
+
+- (void)showPDFWithImages
+{
+    NSURL *url;
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [webView setScalesPageToFit:YES];
+    [webView loadRequest:request];
+    
+    [self. view addSubview:webView];
+}
+
 #pragma mark - Memory Management
 
 - (void)didReceiveMemoryWarning {

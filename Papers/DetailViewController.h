@@ -10,6 +10,6 @@
 
 @interface DetailViewController : UIViewController
 
-@property (nonatomic, strong) NSURL *imageURL;
+@property (nonatomic, strong) NSString *imagePath;
 
 @end

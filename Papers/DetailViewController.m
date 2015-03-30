@@ -8,7 +8,7 @@
 
 #import "DetailViewController.h"
 
-@interface DetailViewController ()
+@interface DetailViewController () <UINavigationControllerDelegate>
 
 @end
 
@@ -28,18 +28,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Set the image to show
+    UIImage *imageToShow = [[UIImage alloc] initWithContentsOfFile:self.imagePath];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+    [imageView setImage:imageToShow];
+    [self.view addSubview:imageView];
 }
 
-#pragma mark - UIWebView
-
-- (void)showPDFWithImages
+- (void)loadView
 {
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-    NSURLRequest *request = [NSURLRequest requestWithURL:self.imageURL];
-    [webView setScalesPageToFit:YES];
-    [webView loadRequest:request];
-    
-    [self. view addSubview:webView];
+    CGRect applicationFrame = [[UIScreen mainScreen] applicationFrame];
+    UIView *contentView = [[UIView alloc] initWithFrame:applicationFrame];
+    self.view = contentView;
 }
 
 #pragma mark - Memory Management

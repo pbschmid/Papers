@@ -73,7 +73,13 @@
 {
     [super viewWillAppear:animated];
     [self fetchContext];
-    [self loadAllImages];
+    
+    // Load all images ONCE only
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self loadAllImages];
+    });
+    
     [self.tableView reloadData];
 }
 
@@ -167,11 +173,10 @@
     // Get the image to show
     Image *image = self.images[indexPath.row];
     NSString *imagePath = image.path;
-    NSURL *imageURL = [NSURL URLWithString:imagePath];
     
     // Show the DetailViewController with the Image
     DetailViewController *detailVC = [[DetailViewController alloc] init];
-    detailVC.imageURL = imageURL;
+    detailVC.imagePath = imagePath;
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
@@ -187,12 +192,16 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // delete from context
+        // Remove the image from the context
         Image *imageToRemove = self.images[indexPath.row];
         [imageToRemove MR_deleteEntity];
         [self saveContext];
         
-        // delete from tableview
+        // Remove the image from the array of images
+        // that were loaded into memory
+        [self.imagesToProcess removeObjectAtIndex:indexPath.row];
+        
+        // Remove the image from the table view
         [self.images removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
