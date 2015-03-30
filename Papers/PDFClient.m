@@ -24,7 +24,7 @@
 
 #pragma mark - PDF Creation
 
-- (void)createPDFForTitle:(NSString *)title withImages:(NSArray *)images
+- (void)createPDFForTitle:(NSString *)title withImages:(NSArray *)images callback:(Callback)callback
 {
     // Create the PDF context using the default page size of 612 x 792
     UIGraphicsBeginPDFContextToFile(title, CGRectZero, nil);
@@ -43,6 +43,8 @@
     
     // Close the PDF context and write the contents out
     UIGraphicsEndPDFContext();
+    
+    callback(YES, nil);
 }
 
 @end

@@ -11,17 +11,17 @@
 #import "MBProgressHUD.h"
 #import "ImageProcessor.h"
 #import <Photos/Photos.h>
-#import "ImageDetails.h"
 #import "PDFClient.h"
 #import "Image.h"
+#import "PDF.h"
 
 
 @interface PapersViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
+@property( nonatomic, strong) NSMutableArray *imagesToProcess;
 @property (nonatomic, strong) NSMutableArray *imagesForPDF;
 @property (nonatomic, strong) NSMutableArray *images;
-@property (nonatomic, strong) Image *image;
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIColor *backgroundColor;
@@ -73,6 +73,7 @@
 {
     [super viewWillAppear:animated];
     [self fetchContext];
+    [self loadAllImages];
     [self.tableView reloadData];
 }
 
@@ -154,15 +155,7 @@
     cell.selectedBackgroundView = selectedView;
     cell.textLabel.textColor = self.textColor;
     cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:15];
-    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Image %@", @""),
-                           image.imageDetails.date];
-    cell.detailTextLabel.textColor = self.textColor;
-    cell.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:10];
-    if ([image.imageDetails.scanned boolValue] == YES) {
-        cell.detailTextLabel.text = NSLocalizedString(@"Scanned", @"");
-    } else {
-        cell.detailTextLabel.text = nil; // set nil for cell reuse
-    }
+    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Image %@", @""), image.date];
 }
 
 #pragma mark - UITableViewDelegate
@@ -173,7 +166,7 @@
     
     // Get the image to show
     Image *image = self.images[indexPath.row];
-    NSString *imagePath = image.imageDetails.path;
+    NSString *imagePath = image.path;
     NSURL *imageURL = [NSURL URLWithString:imagePath];
     
     // Show the DetailViewController with the Image
@@ -221,19 +214,22 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    // get asset URL from image picker
-    NSDate *currentDate = [NSDate date];
+    // Get the Asset URL
     NSURL *imageURL = [info valueForKey:UIImagePickerControllerReferenceURL];
     
-    // dismiss image picker
+    // Dismiss the image picker
     [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
     self.imagePicker = nil;
     
-    // save asset URL to context
+    // Create the Image entity
     Image *image = [Image MR_createEntity];
-    image.imageDetails = [ImageDetails MR_createEntity];
-    image.imageDetails.date = currentDate;
-    image.imageDetails.path = [imageURL absoluteString];
+    NSDate *currentDate = [NSDate date];
+    image.date = currentDate;
+    image.path = [imageURL absoluteString];
+    
+    // Load image into memory
+    // And save the context
+    [self loadImageForAssetURL:imageURL];
     [self saveContext];
     [self.tableView reloadData];
 }
@@ -246,65 +242,101 @@
 
 #pragma mark - Photos Framework
 
-- (UIImage *)loadImageForAssetURL:(NSURL *)url
+- (void)loadAllImages
 {
+    self.imagesToProcess = [[NSMutableArray alloc] init];
+    if ([self.images count] > 0) {
+        NSLog(@"LOADING IMAGES INTO MEMORY.");
+        
+        // Iterate over all images in context
+        for (Image *img in self.images) {
+            // Load every image into memory
+            NSURL *imageURL = [NSURL URLWithString:img.path];
+            [self loadImageForAssetURL:imageURL];
+        }
+    }
+}
+
+- (void)loadImageForAssetURL:(NSURL *)url
+{
+    // PHImageRequestOptions* options = [[PHImageRequestOptions alloc] init];
+    // options.synchronous = YES;
     PHFetchResult *fetchResult = [PHAsset fetchAssetsWithALAssetURLs:@[url] options:nil];
     PHAsset *asset = [fetchResult lastObject];
     
-    __block UIImage *resultImage = nil;
     PHImageManager *manager = [PHImageManager defaultManager];
     [manager requestImageForAsset:asset
                        targetSize:PHImageManagerMaximumSize
                       contentMode:PHImageContentModeDefault
                           options:nil
                     resultHandler:^(UIImage *result, NSDictionary *info) {
-                        resultImage = result;
+                        // Add image to images array
+                        [self.imagesToProcess addObject:result];
+                        NSLog(@"IMAGE ADDED: %@", result);
                     }];
-    
-    return resultImage;
 }
 
 #pragma mark - Image Preprocessing
 
-- (void)prepareImagesForPDF
+- (void)preprocessImagesWithGPUImage
 {
     // Initialize the ImageProcessor
     self.imageProcessor = [ImageProcessor sharedImageProcessor];
     self.imagesForPDF = [[NSMutableArray alloc] init];
     
-    for (Image *img in self.images) {
-        // Load image into memory
-        NSURL *imageURL = [NSURL URLWithString:img.imageDetails.path];
-        UIImage *imageToProcess = [self loadImageForAssetURL:imageURL];
-        
-        // Preprocess image with GPUImage
-        UIImage *processedImage = [self.imageProcessor preprocessSourceImage:imageToProcess];
-        [self.imagesForPDF addObject:processedImage];
-    }
+    // Prepare the images with GPUImage Tresholding
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self.imageProcessor preprocessImages:self.imagesToProcess withCallback:^(BOOL success, NSArray *results, NSError *error) {
+            if (success) {
+                self.imagesForPDF = (NSMutableArray *)results;
+                NSLog(@"SUCCESS PROCESSING IMAGES: %@", self.imagesForPDF.description);
+                
+                // Start creating PDF!!!
+                NSLog(@"START CREATING PDF...");
+                [self startCreatingPDFFromImages];
+                
+            } else {
+                NSLog(@"Error: %@", error.userInfo);
+            }
+        }];
+    });
 }
 
 #pragma mark - Create the PDF with Quartz 2D
 
 - (void)startCreatingPDFFromImages
 {
-    // Prepare the images with GPUImage Tresholding
-    MBProgressHUD *hud = [Utility createProgressHUDForView:self.view withTitle:@"Preparing..."];
-    [hud showAnimated:YES whileExecutingBlock:^{
-        [self prepareImagesForPDF];
-    }];
-    
-    // Create the PDF with the processed images
-    [self createPDFWithImages];
-}
-
-- (void)createPDFWithImages
-{
-    // initialize pdf client
+    // Initialize the PDF client
     self.pdfClient = [PDFClient sharedPDFClient];
     NSString *filePath = [Utility documentsPathForFileName:@"paper.pdf"];
     
-    // create PDF from images
-    [self.pdfClient createPDFForTitle:filePath withImages:self.imagesForPDF];
+    // get background thread
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self.pdfClient createPDFForTitle:filePath withImages:self.imagesForPDF callback:^(BOOL success,  NSError *error) {
+            if (success) {
+                NSLog(@"SUCCESS CREATING PDF!!!");
+                
+                // get main thread
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    // Create the PDF entity
+                    PDF *pdf = [PDF MR_createEntity];
+                    NSDate *currentDate = [NSDate date];
+                    pdf.date = currentDate;
+                    pdf.path = filePath;
+                    
+                    // Save the context
+                    [self saveContext];
+                    [self.tableView reloadData];
+                    
+                });
+                
+                
+            } else {
+                NSLog(@"Error creating PDF: %@", error.userInfo);
+            }
+        }];
+    });
 }
 
 #pragma mark - Source
@@ -330,7 +362,7 @@
 - (void)chooseAction
 {
     // Show the ActionSheet with the option to create the PDF
-    UIAlertController *alertController = [self showActionSheetWithTitle:@"Action" name:@"Create PDF" method:@selector(startCreatingPDFFromImages)];
+    UIAlertController *alertController = [self showActionSheetWithTitle:@"Action" name:@"Create PDF" method:@selector(preprocessImagesWithGPUImage)];
     [self presentViewController:alertController animated:YES completion:nil];
 }
 

@@ -7,8 +7,11 @@
 //
 
 #import "PDFViewController.h"
+#import "PDF.h"
 
 @interface PDFViewController () <UINavigationControllerDelegate>
+
+@property (nonatomic, strong) NSMutableArray *allPDFs;
 
 @end
 
@@ -28,6 +31,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+#pragma mark - MagicalRecord
+
+- (void)saveContext
+{
+    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreWithCompletion:nil];
+}
+
+- (void)fetchContext
+{
+    self.allPDFs = [[PDF MR_findAll] mutableCopy];
 }
 
 #pragma mark - Memory Management

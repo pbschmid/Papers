@@ -25,6 +25,22 @@
 
 #pragma mark - Image Preprocessing
 
+- (void)preprocessImages:(NSArray *)imagesToProcess withCallback:(CompletionBlock)callback
+{
+    NSMutableArray *imagesForPDF = [[NSMutableArray alloc] init];
+    for (UIImage *inputImage in imagesToProcess) {
+        UIImage *processedImage = [self preprocessSourceImage:inputImage];
+        [imagesForPDF addObject:processedImage];
+        NSLog(@"IMAGE PROCESSED: %@", processedImage);
+    }
+    
+    if ([imagesToProcess count] == [imagesForPDF count]) {
+        NSLog(@"ALL IMAGES PROCESSED!!!");
+        callback(YES, imagesForPDF, nil);
+    }
+}
+
+
 - (UIImage *)preprocessSourceImage:(UIImage *)sourceImage
 {
     // initialize GPUImage treshold filter

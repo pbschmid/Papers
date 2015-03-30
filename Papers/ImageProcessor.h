@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void(^CompletionBlock)(BOOL success, NSArray *results, NSError *error);
+
 @interface ImageProcessor : NSObject
 
 + (ImageProcessor *)sharedImageProcessor;
-- (UIImage *)preprocessSourceImage:(UIImage *)sourceImage;
+- (void)preprocessImages:(NSArray *)imagesToProcess withCallback:(CompletionBlock)callback;
 
 @end

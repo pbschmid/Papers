@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void(^Callback)(BOOL success, NSError *error);
+
 @interface PDFClient : NSObject
 
 + (PDFClient *)sharedPDFClient;
-- (void)createPDFForTitle:(NSString *)title withImages:(NSArray *)images;
+- (void)createPDFForTitle:(NSString *)title withImages:(NSArray *)images callback:(Callback)callback;
 
 @end
