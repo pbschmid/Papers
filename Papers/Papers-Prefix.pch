@@ -18,3 +18,7 @@
 #import "CoreData+MagicalRecord.h"
 #import "Utility.h"
 #endif
+
+// Preprocessor Macro for Colors
+#define universalTextColor [UIColor colorWithWhite:0.1f alpha:0.7f]
+#define universalBackgroundColor [UIColor colorWithRed:222/255.0f green:184/255.0f blue:135/255.0f alpha:1.0f]

@@ -8,6 +8,7 @@
 
 #import "PapersViewController.h"
 #import "DetailViewController.h"
+#import "UITableViewCell+Category.h"
 #import "MBProgressHUD.h"
 #import "ImageProcessor.h"
 #import <Photos/Photos.h>
@@ -15,17 +16,13 @@
 #import "Image.h"
 #import "PDF.h"
 
-
 @interface PapersViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
 @property( nonatomic, strong) NSMutableArray *imagesToProcess;
 @property (nonatomic, strong) NSMutableArray *imagesForPDF;
 @property (nonatomic, strong) NSMutableArray *images;
-
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) UIColor *backgroundColor;
-@property (nonatomic, strong) UIColor *textColor;
 
 @property (nonatomic, strong) PDFClient *pdfClient;
 @property (nonatomic, strong) ImageProcessor *imageProcessor;
@@ -40,6 +37,7 @@
 {
     self = [super init];
     if (self) {
+        self.navigationController.delegate = self;
     }
     return self;
 }
@@ -50,15 +48,13 @@
 {
     [super viewDidLoad];
     
-    // Color configuration.
-    self.backgroundColor = [UIColor colorWithRed:222/255.0f green:184/255.0f blue:135/255.0f alpha:1.0f];
-    self.textColor = [UIColor colorWithWhite:0.1f alpha:0.7f];
-    self.view.backgroundColor = self.backgroundColor;
+    // Background color
+    self.view.backgroundColor = universalBackgroundColor;
     
-    // Navigation-Bar.
-    [self configureNavigationBarWithTitle:@"Papers"];
+    // Navigation-Bar
+    [self configureNavigationBar];
     
-    // Table-View.
+    // Table-View
     [self configureTableView];
 }
 
@@ -83,22 +79,13 @@
     [self.tableView reloadData];
 }
 
-- (void)configureNavigationBarWithTitle:(NSString *)title
+- (void)configureNavigationBar
 {
-    self.navigationController.delegate = self;
-    self.navigationController.navigationBar.tintColor = self.textColor;
-    self.navigationController.navigationBar.barTintColor = self.backgroundColor;
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.textColor = self.textColor;
-    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:25];
-    titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@", @""), title];
-    [titleLabel sizeToFit];
+    // UINavigationItemTitleView
+    UILabel *titleLabel = [Utility createTitleViewForTitle:@"Papers" textColor:universalTextColor];
     self.navigationItem.titleView = titleLabel;
-    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init]
-                                                  forBarMetrics:UIBarMetricsDefault];
+    
+    // UINavigationButtonItems
     UIBarButtonItem *add = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                          target:self
                                                                          action:@selector(chooseSource)];
@@ -115,7 +102,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.pagingEnabled = YES;
-    self.tableView.backgroundColor = self.backgroundColor;
+    self.tableView.backgroundColor = universalBackgroundColor;
     self.tableView.separatorColor = [UIColor colorWithWhite:0.6 alpha:0.8];
     self.tableView.frame = self.view.bounds;
     [self.view addSubview:self.tableView];
@@ -146,22 +133,12 @@
     }
     
     if ([Image MR_hasAtLeastOneEntityInContext:[NSManagedObjectContext MR_defaultContext]]) {
-        [self configureCell:cell atIndexPath:indexPath];
+        // Configure the cell
+        Image *image = self.images[indexPath.row];
+        [cell configureCellForDate:image.date];
     }
     
     return cell;
-}
-
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
-{
-    Image *image = self.images[indexPath.row];
-    UIView *selectedView = [[UIView alloc] initWithFrame:CGRectZero];
-    selectedView.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.2f];
-    cell.backgroundColor = [UIColor clearColor];
-    cell.selectedBackgroundView = selectedView;
-    cell.textLabel.textColor = self.textColor;
-    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:15];
-    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Image %@", @""), image.date];
 }
 
 #pragma mark - UITableViewDelegate
@@ -172,11 +149,12 @@
     
     // Get the image to show
     Image *image = self.images[indexPath.row];
-    NSString *imagePath = image.path;
+    NSURL *imagePath = [NSURL URLWithString:image.path];
     
     // Show the DetailViewController with the Image
     DetailViewController *detailVC = [[DetailViewController alloc] init];
     detailVC.imagePath = imagePath;
+    
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
@@ -428,6 +406,19 @@
     [ac addAction:action];
     
     return ac;
+}
+
+#pragma mark - UITabBarControllerDelegate
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+    NSLog(@"TAB DID CHANGE.");
+    if ([self.navigationController.viewControllers count] > 1) {
+        // Pop the DetailViewController if two ViewControllers
+        // Are in the navigation stack of the NavigationController
+        NSLog(@"SHOULD DEALLOCATE DETAILVIEWCONTROLLER.");
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - Memory Management

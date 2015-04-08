@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PDFViewController : UIViewController
+@interface PDFViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @end

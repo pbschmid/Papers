@@ -19,6 +19,20 @@
     return nil;
 }
 
+#pragma mark - UINavigationBar
+
++ (UILabel *)createTitleViewForTitle:(NSString *)title textColor:(UIColor *)color
+{
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    titleLabel.backgroundColor = [UIColor clearColor];
+    titleLabel.textColor = color;
+    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:25];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@", @""), title];
+    [titleLabel sizeToFit];
+    return titleLabel;
+}
+
 #pragma mark - MBProgressHUD
 
 + (MBProgressHUD *)createProgressHUDForView:(UIView *)sourceView withTitle:(NSString *)title

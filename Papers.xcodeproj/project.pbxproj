@@ -27,6 +27,7 @@
 		377AE24B1A7FFC1200F4C126 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 377AE24A1A7FFC1200F4C126 /* Images.xcassets */; };
 		377AE25A1A7FFC1300F4C126 /* PapersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AE2591A7FFC1300F4C126 /* PapersTests.m */; };
 		377AE2661A7FFD7400F4C126 /* PapersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AE2651A7FFD7400F4C126 /* PapersViewController.m */; };
+		379AC2691AD5BA6900AFED76 /* UITableViewCell+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 379AC2681AD5BA6900AFED76 /* UITableViewCell+Category.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,8 @@
 		377AE2631A7FFCDA00F4C126 /* Papers-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Papers-Prefix.pch"; sourceTree = "<group>"; };
 		377AE2641A7FFD7400F4C126 /* PapersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PapersViewController.h; sourceTree = "<group>"; };
 		377AE2651A7FFD7400F4C126 /* PapersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PapersViewController.m; sourceTree = "<group>"; };
+		379AC2671AD5BA6900AFED76 /* UITableViewCell+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+Category.h"; sourceTree = "<group>"; };
+		379AC2681AD5BA6900AFED76 /* UITableViewCell+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+Category.m"; sourceTree = "<group>"; };
 		DA4DEAF5E3A5D0C45904BA43 /* libPods-Papers.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Papers.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2D6C0852AEC27A73EFD1C78 /* Pods-Papers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Papers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Papers/Pods-Papers.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,6 +159,7 @@
 				3723BD901A80161C00AB36F2 /* Launch */,
 				377AE2681A7FFD8100F4C126 /* Delegate */,
 				376919D01AC3501900230E68 /* Helpers */,
+				379AC26A1AD5BABF00AFED76 /* View */,
 				377AE26C1A7FFDBA00F4C126 /* Model */,
 				377AE2671A7FFD7900F4C126 /* Controller */,
 				377AE24A1A7FFC1200F4C126 /* Images.xcassets */,
@@ -229,6 +233,15 @@
 				376919C81AC34E1E00230E68 /* DropboxClient.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		379AC26A1AD5BABF00AFED76 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				379AC2671AD5BA6900AFED76 /* UITableViewCell+Category.h */,
+				379AC2681AD5BA6900AFED76 /* UITableViewCell+Category.m */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		F07DB36A0151E7C5AA621C20 /* Frameworks */ = {
@@ -386,6 +399,7 @@
 				376919C31AC34C9A00230E68 /* DetailViewController.m in Sources */,
 				376919CC1AC34F7B00230E68 /* ImageProcessor.m in Sources */,
 				377AE2661A7FFD7400F4C126 /* PapersViewController.m in Sources */,
+				379AC2691AD5BA6900AFED76 /* UITableViewCell+Category.m in Sources */,
 				377AE2401A7FFC1200F4C126 /* main.m in Sources */,
 				376919C91AC34E1E00230E68 /* DropboxClient.m in Sources */,
 				372ED9741AC71B760074789D /* Image.m in Sources */,

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PapersViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface PapersViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITabBarControllerDelegate>
 
 @end

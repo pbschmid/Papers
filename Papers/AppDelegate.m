@@ -20,40 +20,48 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    // TabBarController, View Controllers
+    // TabBarController
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    PapersViewController *pvc1 = [[PapersViewController alloc] init];
-    PDFViewController *pvc2 = [[PDFViewController alloc] init];
     
     // NavigationControllers
-    UINavigationController *nvc1 = [[UINavigationController alloc] initWithRootViewController:pvc1];
-    UINavigationController *nvc2 = [[UINavigationController alloc] initWithRootViewController:pvc2];
+    UINavigationController *nvc1 = [[UINavigationController alloc] init];
+    UINavigationController *nvc2 = [[UINavigationController alloc] init];
+    tabBarController.viewControllers = @[nvc1, nvc2];
+    tabBarController.selectedViewController = nvc1;
+    
+    // ViewControllers
+    PapersViewController *pvc1 = [[PapersViewController alloc] init];
+    PDFViewController *pvc2 = [[PDFViewController alloc] init];
+    nvc1.viewControllers = @[pvc1];
+    nvc2.viewControllers = @[pvc2];
+    
+    // TabBarControllerDelegate
+    tabBarController.delegate = pvc1;
     
     // RootViewController
-    [tabBarController setViewControllers:[NSArray arrayWithObjects:nvc1, nvc2, nil]];
-    [self.window setRootViewController:tabBarController];
+    self.window.rootViewController = tabBarController;
     [self customizeAppearance];
     
     // MagicalRecord
     [MagicalRecord setupCoreDataStackWithStoreNamed:@"ImageModel"];
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
 
 - (void)customizeAppearance
 {
-    // UITabBar Colors
-    UIColor *bgColor = [UIColor colorWithRed:222/255.0f green:184/255.0f blue:135/255.0f alpha:1.0f];
-    UIColor *textColor = [UIColor colorWithWhite:0.1f alpha:0.7f];
-    
     // UITabBar Appearance
-    [[UITabBar appearance] setBarTintColor:bgColor];
-    [[UITabBar appearance] setTintColor:textColor];
+    [[UITabBar appearance] setBarTintColor:universalBackgroundColor];
+    [[UITabBar appearance] setTintColor:universalTextColor];
     [[UITabBar appearance] setTranslucent:YES];
     
     // NavigationBar Appearance
-    [[UINavigationBar appearance] setBarTintColor:bgColor];
-    [[UINavigationBar appearance] setTintColor:textColor];
+    [[UINavigationBar appearance] setBarTintColor:universalBackgroundColor];
+    [[UINavigationBar appearance] setTintColor:universalTextColor];
+    [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
+    [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init]
+                                       forBarMetrics:UIBarMetricsDefault];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
