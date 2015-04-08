@@ -8,11 +8,13 @@
 
 #import "PDFViewController.h"
 #import "UITableViewCell+Category.h"
+#import "UITableView+Category.h"
 #import "PDF.h"
 
 @interface PDFViewController () <UINavigationControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *allPDFs;
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
@@ -29,18 +31,29 @@
     return self;
 }
 
-- (void)dealloc
-{
-    NSLog(@"DEALLOC PDFViewController.");
-}
-
 #pragma mark - View life cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Background color
     self.view.backgroundColor = universalBackgroundColor;
     
+    // Navigation-Bar
+    [self configureNavigationBar];
+    
+    // Table-View
+    self.tableView = [UITableView tableViewWithFrame:self.view.bounds];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [self.view addSubview:self.tableView];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self fetchContext];
+    [self.tableView reloadData];
 }
 
 - (void)loadView
@@ -48,6 +61,13 @@
     CGRect applicationFrame = [[UIScreen mainScreen] applicationFrame];
     UIView *contentView = [[UIView alloc] initWithFrame:applicationFrame];
     self.view = contentView;
+}
+
+- (void)configureNavigationBar
+{
+    // UINavigationItemTitleView
+    UILabel *titleLabel = [Utility createTitleViewForTitle:@"PDF" textColor:universalTextColor];
+    self.navigationItem.titleView = titleLabel;
 }
 
 #pragma mark - UITableViewDataSource
@@ -84,6 +104,49 @@
 }
 
 #pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    // Get the image to show
+    PDF *pdf = self.allPDFs[indexPath.row];
+    //NSURL *imagePath = [NSURL URLWithString:pdf.path];
+    
+    // Show the DetailViewController with the Image
+    //DetailViewController *detailVC = [[DetailViewController alloc] init];
+    //detailVC.imagePath = imagePath;
+    
+    //[self.navigationController pushViewController:detailVC animated:YES];
+    NSLog(@"PDF %@ CLICKED.", pdf.description);
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([PDF MR_hasAtLeastOneEntityInContext:[NSManagedObjectContext MR_defaultContext]]) {
+        return UITableViewCellEditingStyleDelete;
+    } else {
+        return UITableViewCellEditingStyleNone;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Remove the image from the context
+        PDF *pdfToRemove = self.allPDFs[indexPath.row];
+        [pdfToRemove MR_deleteEntity];
+        [self saveContext];
+        
+        // Remove the image from the array of images
+        // that were loaded into memory
+        // [self.imagesToProcess removeObjectAtIndex:indexPath.row];
+        
+        // Remove the image from the table view
+        [self.allPDFs removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
 
 #pragma mark - MagicalRecord
 

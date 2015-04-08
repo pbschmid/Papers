@@ -18,7 +18,7 @@
     self.selectedBackgroundView = selectedView;
     self.textLabel.textColor = universalTextColor;
     self.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:15];
-    self.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Image %@", @""), date];
+    self.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@", @""), date];
 }
 
 @end

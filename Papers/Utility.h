@@ -17,19 +17,3 @@
 + (NSString *)documentsPathForFileName:(NSString *)name;
 
 @end
-
-/*
-
- + (UITableView *)configureTableView:(UITableView *)tableView forFrame:(CGRect)frame inView:(UIView *)view;
- 
- + (UITableView *)configureTableView:(UITableView *)tableView forFrame:(CGRect)frame inView:(UIView *)view
- {
- tableView = [[UITableView alloc] init];
- tableView.pagingEnabled = YES;
- tableView.backgroundColor = universalBackgroundColor;
- tableView.separatorColor = [UIColor colorWithWhite:0.6 alpha:0.8];
- tableView.frame = frame;
- return tableView;
- }
- 
-*/

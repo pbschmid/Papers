@@ -9,6 +9,7 @@
 #import "PapersViewController.h"
 #import "DetailViewController.h"
 #import "UITableViewCell+Category.h"
+#import "UITableView+Category.h"
 #import "MBProgressHUD.h"
 #import "ImageProcessor.h"
 #import <Photos/Photos.h>
@@ -55,7 +56,10 @@
     [self configureNavigationBar];
     
     // Table-View
-    [self configureTableView];
+    self.tableView = [UITableView tableViewWithFrame:self.view.bounds];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [self.view addSubview:self.tableView];
 }
 
 - (void)loadView
@@ -82,7 +86,7 @@
 - (void)configureNavigationBar
 {
     // UINavigationItemTitleView
-    UILabel *titleLabel = [Utility createTitleViewForTitle:@"Papers" textColor:universalTextColor];
+    UILabel *titleLabel = [Utility createTitleViewForTitle:@"Images" textColor:universalTextColor];
     self.navigationItem.titleView = titleLabel;
     
     // UINavigationButtonItems
@@ -94,18 +98,6 @@
                                                                           action:@selector(chooseAction)];
     self.navigationItem.rightBarButtonItems = @[scan];
     self.navigationItem.leftBarButtonItems = @[add];
-}
-
-- (void)configureTableView
-{
-    self.tableView = [[UITableView alloc] init];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.pagingEnabled = YES;
-    self.tableView.backgroundColor = universalBackgroundColor;
-    self.tableView.separatorColor = [UIColor colorWithWhite:0.6 alpha:0.8];
-    self.tableView.frame = self.view.bounds;
-    [self.view addSubview:self.tableView];
 }
 
 #pragma mark - UITableViewDataSource
